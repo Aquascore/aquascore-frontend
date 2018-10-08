@@ -1,0 +1,29 @@
+<mat-card class="section">
+  <mat-card-content>
+    <h3>News</h3>
+    <mat-list>
+      <div *ngFor="let newsItem of newsItems">
+        <a target="_blank" mat-list-item [href]="newsItem.link">
+          <p mat-line>{{newsItem.title}}</p>
+          <p mat-line class="date">{{newsItem.date | date}}</p>
+          <i class="material-icons">
+            launch
+          </i>
+        </a>
+      </div>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="section">
+  <h3>Upcoming races</h3>
+  <mat-card-content>
+    <mat-list-item *ngFor="let race of races">
+      <p mat-line>
+        <span class="race-part">{{race.country}}</span>
+        <span class="race-part">{{race.date | date}}</span>
+        <span class="race-part">{{race.date | date: 'HH:mm'}}</span>
+      </p>
+    </mat-list-item>
+  </mat-card-content>
+</mat-card>

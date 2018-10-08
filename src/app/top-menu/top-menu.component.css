@@ -1,0 +1,12 @@
+.menu-toggle {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.content {
+  padding: 15px;
+}
+
+.sidenav h2 {
+  padding: 0 15px;
+}

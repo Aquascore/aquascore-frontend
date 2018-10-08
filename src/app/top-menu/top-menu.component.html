@@ -1,0 +1,22 @@
+<mat-drawer-container fullscreen>
+  <mat-drawer #drawer mode="side" class="sidenav">
+    <h2>Aquadis</h2>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/overview">Overview</a>
+      <a mat-list-item routerLink="/pools">Pools</a>
+      <a mat-list-item routerLink="/calendar">Calendar</a>
+      <a mat-list-item routerLink="/log-out">Log out</a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <mat-toolbar color="primary">
+      <i class="material-icons menu-toggle" (click)="drawer.toggle()">
+        menu
+      </i>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

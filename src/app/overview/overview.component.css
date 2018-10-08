@@ -1,0 +1,16 @@
+.section {
+  margin: 0 0 2.5em 0;
+}
+
+.date {
+  color: gray;
+}
+
+i {
+  text-decoration: none !important;
+}
+
+.race-part {
+  display: inline-block;
+  width: 33%;
+}
