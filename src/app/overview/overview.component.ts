@@ -48,9 +48,9 @@ export class OverviewComponent implements OnInit {
   showRaceSchedule() {
     this.rsService.getSchedule()
       .subscribe((data) => {
-        for (let race of data.MRData.RaceTable.Races) {
-          console.log(race);
-        }
+        // for (let race of data.MRData.RaceTable.Races) {
+        //   console.log(race);
+        // }
       });
   }
 }
