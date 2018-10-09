@@ -13,9 +13,16 @@ import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
+  { path: 'login', component: LoginComponent },
   { path: '',
     redirectTo: '/overview',
     pathMatch: 'full'
@@ -28,7 +35,8 @@ const appRoutes: Routes = [
     AppComponent,
     TopMenuComponent,
     OverviewComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +47,10 @@ const appRoutes: Routes = [
     MatListModule,
     MatCardModule,
     MatTableModule,
+    MatGridListModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
