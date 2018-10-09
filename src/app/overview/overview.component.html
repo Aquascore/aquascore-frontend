@@ -17,12 +17,14 @@
 
 <mat-card class="section">
   <h3>Upcoming races</h3>
-  <mat-card-content>
+  <mat-card-content class="upcoming-races">
+    <mat-divider></mat-divider>
     <mat-list-item *ngFor="let race of races">
+      <mat-divider></mat-divider>
       <p mat-line>
-        <span class="race-part">{{race.country}}</span>
-        <span class="race-part">{{race.date | date}}</span>
-        <span class="race-part">{{race.date | date: 'HH:mm'}}</span>
+        <span class="race-part"><i>{{race.raceName}}</i></span>
+        <span class="race-part-mid">{{race.date | date}}</span>
+        <span class="race-part-right">{{race.time}}</span>
       </p>
     </mat-list-item>
   </mat-card-content>
