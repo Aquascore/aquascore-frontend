@@ -12,5 +12,20 @@ i {
 
 .race-part {
   display: inline-block;
-  width: 33%;
+  width: 40%;
+  vertical-align: top;
+  margin-right: 1em;
+}
+
+.race-part-mid {
+  display: inline-block;
+  width: 30%;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+.race-part-right {
+  display: inline-block;
+  width: 20%;
+  vertical-align: top;
 }

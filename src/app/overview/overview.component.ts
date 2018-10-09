@@ -8,7 +8,7 @@ export interface NewsItem {
 }
 
 export interface Race {
-  name: string;
+  raceName: string;
   date: Date;
   time: string;
 }
@@ -33,7 +33,6 @@ export class OverviewComponent implements OnInit {
   ];
 
   races: Race[] = [];
-  displayedColumns: string[] = ['name', 'date', 'time'];
 
   constructor(private rsService: RaceScheduleService) { }
 
@@ -44,12 +43,17 @@ export class OverviewComponent implements OnInit {
   showRaceSchedule() {
     this.rsService.getSchedule()
       .subscribe((data: RaceAPIResponse) => {
-        for (let race of data.MRData.RaceTable.Races) {
-          console.log(race);
+        const futureRaces = data.MRData.RaceTable.Races
+          .filter(race => {
+            return new Date(race.date) >= new Date();
+          })
+          .slice(0, 5);
+
+        for (let race of futureRaces) {
           this.races.push({
-            name: race.raceName,
+            raceName: race.raceName,
             date: new Date(race.date),
-            time: race.time
+            time: race.time.substring(0, 5)
           });
         }
       });
