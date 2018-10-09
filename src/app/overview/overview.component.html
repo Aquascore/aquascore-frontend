@@ -20,9 +20,9 @@
   <mat-card-content>
     <mat-list-item *ngFor="let race of races">
       <p mat-line>
-        <span class="race-part">{{race.country}}</span>
+        <span class="race-part">{{race.name}}</span>
         <span class="race-part">{{race.date | date}}</span>
-        <span class="race-part">{{race.date | date: 'HH:mm'}}</span>
+        <span class="race-part">{{race.time}}</span>
       </p>
     </mat-list-item>
   </mat-card-content>

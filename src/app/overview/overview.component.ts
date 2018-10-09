@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RaceScheduleService } from '../race-schedule.service';
+import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 
 export interface NewsItem {
   title: string;
@@ -8,8 +8,9 @@ export interface NewsItem {
 }
 
 export interface Race {
-  country: string;
+  name: string;
   date: Date;
+  time: string;
 }
 
 @Component({
@@ -31,13 +32,8 @@ export class OverviewComponent implements OnInit {
     }
   ];
 
-  races: Race[] = [
-    {
-      country: "Singapore",
-      date: new Date('12/08/18 15:00')
-    }
-  ];
-  displayedColumns: string[] = ['country', 'date'];
+  races: Race[] = [];
+  displayedColumns: string[] = ['name', 'date', 'time'];
 
   constructor(private rsService: RaceScheduleService) { }
 
@@ -47,10 +43,15 @@ export class OverviewComponent implements OnInit {
 
   showRaceSchedule() {
     this.rsService.getSchedule()
-      .subscribe((data) => {
-        // for (let race of data.MRData.RaceTable.Races) {
-        //   console.log(race);
-        // }
+      .subscribe((data: RaceAPIResponse) => {
+        for (let race of data.MRData.RaceTable.Races) {
+          console.log(race);
+          this.races.push({
+            name: race.raceName,
+            date: new Date(race.date),
+            time: race.time
+          });
+        }
       });
   }
 }
