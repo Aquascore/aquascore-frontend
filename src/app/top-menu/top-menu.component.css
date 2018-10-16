@@ -8,6 +8,10 @@
   padding: 15px;
 }
 
+mat-sidenav {
+  width: 50%;
+}
+
 mat-sidenav h2 {
   padding: 0 15px;
   width: 33%;
