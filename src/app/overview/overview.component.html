@@ -1,15 +1,16 @@
 <mat-card class="section">
   <mat-card-content>
     <h3>News</h3>
-    <mat-list>
+    <mat-list class="news-list">
       <div *ngFor="let newsItem of newsItems">
-        <a target="_blank" mat-list-item [href]="newsItem.link">
-          <p mat-line>{{newsItem.title}}</p>
-          <p mat-line class="date">{{newsItem.date | date}}</p>
-          <i class="material-icons">
-            launch
-          </i>
-        </a>
+          <mat-card class="news-article">
+            <img src="https://via.placeholder.com/300x200">
+            <mat-card-content>
+              <mat-card-title>{{newsItem.title}}</mat-card-title>
+              <mat-card-subtitle>{{newsItem.date | date}}</mat-card-subtitle>
+              <p>Test</p>
+            </mat-card-content>
+          </mat-card>
       </div>
     </mat-list>
   </mat-card-content>
@@ -29,3 +30,13 @@
     </mat-list-item>
   </mat-card-content>
 </mat-card>
+
+<div class='schedule'>
+  <div class='race'>
+    <div class='race-number'>1</div>
+    <img class="race-country" src="http://flags.fmcdn.net/data/flags/w1160/au.png">
+    <div class='race-name'>Australian Grand Prix</div>
+    <div class='race-time'>Oct 21, 2018 : 18:10
+    </div>
+  </div>
+</div>
