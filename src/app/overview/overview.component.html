@@ -16,7 +16,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="section">
+<mat-card id="mobile-races" class="section">
   <h3>Upcoming races</h3>
   <mat-card-content class="upcoming-races">
     <mat-divider></mat-divider>
@@ -31,12 +31,16 @@
   </mat-card-content>
 </mat-card>
 
-<div class='schedule'>
-  <div class='race'>
-    <div class='race-number'>1</div>
-    <img class="race-country" src="http://flags.fmcdn.net/data/flags/w1160/au.png">
-    <div class='race-name'>Australian Grand Prix</div>
-    <div class='race-time'>Oct 21, 2018 : 18:10
+<div id="website-races">
+  <h3>Upcoming races</h3>
+  <div class='schedule'>
+    <div class='race' *ngFor="let race of races; let i = index">
+      <div class='race-number'>{{i+1}}</div>
+      <div class="split"></div>
+      <img class="race-country" src="/src/assets/images/countries/{{race.country}}.png">
+      <div class="split"></div>
+      <div class='race-name'>{{race.raceName}}</div>
+      <div class='race-time'>{{race.date | date}} : {{race.time}}</div>
     </div>
   </div>
 </div>

@@ -2,6 +2,10 @@
   margin: 0 0 2.5em 0;
 }
 
+.upcoming {
+  display: none;
+}
+
 .date {
   color: gray;
 }
@@ -60,11 +64,12 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
+  line-height: 2.5rem;
   height: 40px;
-  line-height: 2rem;
   margin-left: 1%;
   overflow: hidden;
   transform: skew(-27deg);
+  margin-bottom: 0.4%;
 }
 
 .race-number {
@@ -117,31 +122,36 @@ race-name:before {
 
 .race-country {
   height: inherit;
-  margin-left: -.6rem;
   width: 10%;
   z-index: 9;
   background-color: #fff;
 }
 
+.split {
+  width: .5rem;
+  height: inherit;
+  z-index: 9;
+  background-color: #fff;
+}
+
 @media only screen and (max-width: 768px) {
-  .race-country {
-    width: 20%;
+  /* For mobile phones: */
+  #mobile-races {
+    display: inline;
   }
 
-  .race-name {
-    text-transform: uppercase;
-    height: inherit;
-    width: 55%;
-    background-color: #424242;
-    padding: 0 2px;
-  }
-
-  .race-time {
-    width: 25%;
-    padding: 0 3px;
-  }
-
-  .race-number {
+  #website-races {
     display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For mobile phones: */
+  #mobile-races {
+    display: none;
+  }
+
+  #website-races {
+    display: inline;
   }
 }

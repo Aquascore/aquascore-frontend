@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 import { Formula1NewsService } from '../formula1-news.service';
+import {lookup} from 'country-data';
 
 export interface NewsItem {
   title: string;
@@ -10,6 +11,7 @@ export interface NewsItem {
 
 export interface Race {
   raceName: string;
+  country: string;
   date: Date;
   time: string;
 }
@@ -49,6 +51,16 @@ export class OverviewComponent implements OnInit {
       });
   }
 
+  countryToCountryCode(country : string) {
+    if (country === "USA") {
+      return "us";
+    }
+    if (country === "UAE") {
+      return "ae";
+    }
+    return lookup.countries({name: country})[0].alpha2.toLowerCase();
+  }
+
   showRaceSchedule() {
     this.rsService.getSchedule()
       .subscribe((data: RaceAPIResponse) => {
@@ -59,8 +71,10 @@ export class OverviewComponent implements OnInit {
           .slice(0, 5);
 
         for (let race of futureRaces) {
+          var country = this.countryToCountryCode(race.Circuit.Location.country);
           this.races.push({
             raceName: race.raceName,
+            country: country,
             date: new Date(race.date),
             time: race.time.substring(0, 5)
           });
