@@ -4,6 +4,11 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/overview" (click)="drawer.toggle()">Overview</a>
       <a mat-list-item routerLink="/pools" (click)="drawer.toggle()">Pools</a>
+      <mat-list class="sub-item">
+        <div *ngFor="let pool of userPools">
+          <a mat-list-item routerLink="/pool/1" (click)="drawer.toggle()">{{pool.name}}</a>
+        </div>
+      </mat-list>
       <a mat-list-item routerLink="/calendar" (click)="drawer.toggle()">Calendar</a>
       <a mat-list-item routerLink="/log-out" (click)="drawer.toggle()">Log out</a>
     </mat-nav-list>

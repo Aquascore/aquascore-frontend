@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
+import { Formula1NewsService } from '../formula1-news.service';
 
 export interface NewsItem {
   title: string;
@@ -34,10 +35,18 @@ export class OverviewComponent implements OnInit {
 
   races: Race[] = [];
 
-  constructor(private rsService: RaceScheduleService) { }
+  constructor(private rsService: RaceScheduleService, private newsService: Formula1NewsService) { }
 
   ngOnInit() {
+    this.showNews();
     this.showRaceSchedule();
+  }
+
+  showNews() {
+    this.newsService.getNews()
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   showRaceSchedule() {

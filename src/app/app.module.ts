@@ -13,9 +13,11 @@ import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PoolsComponent } from './pools/pools.component';
 
 const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
+  { path: 'pools', component: PoolsComponent },
   { path: '',
     redirectTo: '/overview',
     pathMatch: 'full'
@@ -28,7 +30,8 @@ const appRoutes: Routes = [
     AppComponent,
     TopMenuComponent,
     OverviewComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PoolsComponent
   ],
   imports: [
     BrowserModule,

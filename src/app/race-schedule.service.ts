@@ -41,6 +41,6 @@ export class RaceScheduleService {
   constructor(private http: HttpClient) { }
 
   getSchedule() {
-    return this.http.get(`${this.API_URL}/current.json`);
+    return this.http.get<RaceAPIResponse>(`${this.API_URL}/current.json`);
   }
 }

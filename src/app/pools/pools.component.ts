@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { PoolsService, Pool } from '../pools.service';
 
 @Component({
-  selector: 'app-top-menu',
-  templateUrl: './top-menu.component.html',
-  styleUrls: ['./top-menu.component.css']
+  selector: 'app-pools',
+  templateUrl: './pools.component.html',
+  styleUrls: ['./pools.component.css']
 })
-export class TopMenuComponent implements OnInit {
+export class PoolsComponent implements OnInit {
   userPools: Pool[];
+  displayedColumns: string[] = ['position', 'name'];
 
   constructor(private poolsService: PoolsService) { }
 
