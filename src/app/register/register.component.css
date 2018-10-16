@@ -1,10 +1,19 @@
  .form-mijn-eigen{
     display: inline-grid;
 } 
+
 .register-player{
-
-    max-width: 500px;
-
+    max-width: 30em;
     margin: 0 auto;
-   
 }
+
+.btn-width-total button {
+    width: 100%;
+    display: block;
+    margin-top: 5px!important;
+  }
+
+  .textField-width {
+      width: 100%;
+  }
+  
