@@ -1,3 +1,10 @@
-.form-mijn-eigen{
+ .form-mijn-eigen{
     display: inline-grid;
+} 
+.register-player{
+
+    max-width: 500px;
+
+    margin: 0 auto;
+   
 }

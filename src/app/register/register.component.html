@@ -1,26 +1,43 @@
-<mat-card>
-  <form class="example-form form-mijn-eigen">
-    <mat-form-field class="example-full-width">
-      <input matInput id="" placeholder="Name" >
-    </mat-form-field>
+<mat-grid-list class="register-player" cols="1" rowHeight="1:1">
+  <mat-card class="example-card">
+    <mat-card-content>
+      <form class="example-form">
+        <div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last name">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input id="userEmail" matInput placeholder="Email">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input id="userPassword" matInput placeholder="Password" type="password">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input id="userPasswordConfirmation" matInput placeholder="Password" type="password">
+          </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput id="" placeholder="Last name">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput id="" placeholder="E-mail" type="email">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput id="" placeholder="Password"  type="password">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput id="" placeholder="Repeat Password"  type="password">
-    </mat-form-field>
-
-    <button mat-raised-button color="primary">Register</button>
-
-  </form>
-</mat-card>
+          </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>REGISTER</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-grid-list>

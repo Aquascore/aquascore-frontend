@@ -9,6 +9,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -17,10 +20,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PoolsComponent } from './pools/pools.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
-import { MatGridListModule } from '@angular/material/grid-list';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 
 const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
@@ -58,6 +57,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
