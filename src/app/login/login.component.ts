@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-   check() {
+   checkLogin() {
      this.router.navigateByUrl('/overview');
   }
+  checkRegister() {
+    this.router.navigateByUrl('/register');
+ }
 
 }

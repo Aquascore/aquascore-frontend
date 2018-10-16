@@ -8,6 +8,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -15,16 +19,13 @@ import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PoolsComponent } from './pools/pools.component';
 import { LoginComponent } from './login/login.component';
-
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
   { path: 'overview', component: OverviewComponent },
   { path: 'pools', component: PoolsComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '',
     redirectTo: '/login',
     pathMatch: 'full'
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     OverviewComponent,
     PageNotFoundComponent,
     LoginComponent,
-    PoolsComponent
+    PoolsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatTableModule,
     MatGridListModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
@@ -61,6 +66,7 @@ const appRoutes: Routes = [
     )
   ],
   providers: [],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
