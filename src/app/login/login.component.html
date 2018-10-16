@@ -1,8 +1,9 @@
 <mat-grid-list class="login-player" cols="1" rowHeight="1:1">
-  <mat-card class="example-card">
+  <h1>Aquascore</h1>
+  <mat-card>
     <mat-card-content>
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
+      <form>
+        <mat-form-field class="full-width">
           <input id="userEmail" matInput placeholder="Email" [formControl]="emailFormControl">
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
@@ -11,7 +12,7 @@
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="full-width">
           <input id="userPassword" matInput placeholder="Password" type="password">
         </mat-form-field>
       </form>

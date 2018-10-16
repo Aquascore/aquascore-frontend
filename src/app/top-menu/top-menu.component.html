@@ -1,6 +1,11 @@
-<mat-drawer-container fullscreen>
-  <mat-drawer #drawer mode="over" class="sidenav">
-    <h2>Aquadis</h2>
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <i class="material-icons menu-toggle" (click)="drawer.toggle()">
+    menu
+  </i>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="over">
     <mat-nav-list>
       <a mat-list-item routerLink="/overview" (click)="drawer.toggle()">Overview</a>
       <a mat-list-item routerLink="/pools" (click)="drawer.toggle()">Pools</a>
@@ -10,18 +15,11 @@
         </div>
       </mat-list>
       <a mat-list-item routerLink="/calendar" (click)="drawer.toggle()">Calendar</a>
-      <a mat-list-item routerLink="/log-out" (click)="drawer.toggle()">Log out</a>
+      <a mat-list-item routerLink="/login" (click)="drawer.toggle()">Log out</a>
     </mat-nav-list>
-  </mat-drawer>
+  </mat-sidenav>
 
-  <mat-drawer-content>
-    <mat-toolbar color="primary">
-      <i class="material-icons menu-toggle" (click)="drawer.toggle()">
-        menu
-      </i>
-    </mat-toolbar>
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

@@ -7,11 +7,22 @@
   padding: 15px;
 }
 
-.sidenav h2 {
+mat-sidenav h2 {
   padding: 0 15px;
   width: 33%;
 }
 
 .sub-item {
   padding-left: 1.5em;
+}
+
+mat-toolbar {
+  height: 56px;
+  position: relative;
+  z-index: 100;
+}
+
+mat-sidenav-container {
+  width: 100% !important;
+  height: calc(100vh - 56px) !important;
 }
