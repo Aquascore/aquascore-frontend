@@ -32,11 +32,6 @@ mat-sidenav-container {
   height: calc(100vh - 56px) !important;
 }
 
-.mat-primary {
-  background: black;
-      color: #FFFFFF;
-}
-
 .logo {
   margin: 0 auto;
   width: 100px;
