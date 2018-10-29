@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,15 +23,17 @@ import { PoolsComponent } from './pools/pools.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { environment } from '../environments/environment';
+import { UserService } from './user.service';
+import { AuthGuard } from './auth.guard';
+
+export const tokenGetter = () => localStorage.getItem('access_token');
+
 const appRoutes: Routes = [
-  { path: 'overview', component: OverviewComponent },
-  { path: 'pools', component: PoolsComponent },
+  { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
+  { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -63,10 +67,21 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
-    )
+    ),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: [environment.apiDomain],
+        blacklistedRoutes: [
+          `${environment.apiDomain}/users/sign-up`,
+          `${environment.apiDomain}/users/sign-in`
+        ]
+      }
+    }),
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
-  
+  providers: [UserService, AuthGuard],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

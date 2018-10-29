@@ -1,43 +1,40 @@
 <mat-grid-list class="register-player" cols="1" rowHeight="1:1">
-  <mat-card class="example-card">
+  <mat-card>
     <mat-card-content>
-      <form class="example-form">
+      <form #signupForm="ngForm" (ngSubmit)="register(signupForm)">
         <div>
           <mat-form-field class="textField-width" color="accent">
-            <input matInput placeholder="First name">
+            <input matInput name="first_name" placeholder="First name" ngModel required>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="textField-width" color="accent">
-            <input matInput placeholder="Last name">
+            <input matInput name="last_name" placeholder="Last name" ngModel required>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="textField-width" color="accent">
-            <input id="userEmail" matInput placeholder="Email">
+            <input name="email" matInput placeholder="Email" ngModel required>
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Please enter a valid email address
             </mat-error>
-            <mat-error *ngIf="emailFormControl.hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="textField-width" color="accent">
-            <input id="userPassword" matInput placeholder="Password" type="password">
+            <input name="password" matInput placeholder="Password" type="password" ngModel required>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="textField-width" color="accent">
-            <input id="userPasswordConfirmation" matInput placeholder="Confirm password" type="password">
+            <input name="confirm_password" matInput placeholder="Confirm password" type="password" required>
           </mat-form-field>
 
           </div>
+        <mat-card-actions class= "btn-width-total">
+          <button mat-raised-button color="primary" type="submit">REGISTER</button>
+        </mat-card-actions>
       </form>
     </mat-card-content>
-    <mat-card-actions class= "btn-width-total">
-      <button mat-raised-button color="primary"(click)="check()">REGISTER</button>
-    </mat-card-actions>
   </mat-card>
 </mat-grid-list>

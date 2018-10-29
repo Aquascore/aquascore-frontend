@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PoolsService, Pool } from '../pools.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -9,9 +11,19 @@ import { PoolsService, Pool } from '../pools.service';
 export class TopMenuComponent implements OnInit {
   userPools: Pool[];
 
-  constructor(private poolsService: PoolsService) { }
+  constructor(private router: Router,
+    private poolsService: PoolsService,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.userPools = this.poolsService.getUserPools();
+    this.poolsService.getUserPools()
+      .subscribe((pools: Pool[]) => {
+        this.userPools = pools;
+      });
+  }
+
+  logOut() {
+    this.userService.logOut();
+    this.router.navigateByUrl('/login');
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { FormControl, Validators, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,29 @@ export class LoginComponent implements OnInit {
     Validators.email,
   ]);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  login(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+
+    const formUser = form.value;
+
+    this.userService.signIn(formUser)
+      .subscribe(
+        _ => {
+          this.router.navigateByUrl('/');
+        },
+        error => {
+          console.log(error.message);
+        }
+      );
   }
 
-   checkLogin() {
-     this.router.navigateByUrl('/overview');
-  }
   checkRegister() {
     this.router.navigateByUrl('/register');
- }
-
+  }
 }

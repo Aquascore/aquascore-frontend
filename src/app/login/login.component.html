@@ -2,28 +2,23 @@
   <h1>Aquascore</h1>
   <mat-card>
     <mat-card-content>
-      <form>
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <mat-form-field class="full-width" color="accent">
-          <input id="userEmail" matInput placeholder="Email" [formControl]="emailFormControl">
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
+          <input name="email" matInput placeholder="Email" ngModel required>
         </mat-form-field>
         <mat-form-field class="full-width" color="accent">
-          <input id="userPassword" matInput placeholder="Password" type="password">
+          <input name="password" matInput placeholder="Password" type="password" ngModel required>
         </mat-form-field>
+
+        <mat-card-actions class="btn-width-total">
+          <div>
+            <button mat-raised-button color="primary" type="submit">LOGIN</button>
+          </div>
+          <div>
+            <button mat-raised-button (click)="checkRegister()" >REGISTER</button>
+          </div>
+        </mat-card-actions>
       </form>
     </mat-card-content>
-    <mat-card-actions class="btn-width-total">
-      <div>
-        <button mat-raised-button color="primary" (click)="checkLogin()">LOGIN</button>
-      </div>
-      <div>
-        <button mat-raised-button (click)="checkRegister()" >REGISTER</button>
-      </div>
-    </mat-card-actions>
   </mat-card>
 </mat-grid-list>

@@ -13,6 +13,9 @@ export class PoolsComponent implements OnInit {
   constructor(private poolsService: PoolsService) { }
 
   ngOnInit() {
-    this.userPools = this.poolsService.getUserPools();
+    this.poolsService.getUserPools()
+      .subscribe((pools: Pool[]) => {
+        this.userPools = pools;
+      });
   }
 }
