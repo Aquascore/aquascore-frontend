@@ -1,5 +1,6 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <i class="material-icons menu-toggle" (click)="drawer.toggle()">
+  <i class="material-icons menu-toggle" (click)="drawer.toggle()"
+    *ngIf="userService.isLoggedIn()">
     menu
   </i>
   <img class="logo" src="/src/assets/images/f1logo.png">
