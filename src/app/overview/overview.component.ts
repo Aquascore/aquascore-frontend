@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 import { Formula1NewsService } from '../formula1-news.service';
 import {lookup} from 'country-data';
+import { race } from 'q';
 
 export interface NewsItem {
   title: string;
+  description: string;
   link: string;
-  date: Date;
+  pubDate: string;
+  guid: Object;
+  "media:thumbnail": Object;
 }
 
 export interface Race {
@@ -24,14 +28,20 @@ export interface Race {
 export class OverviewComponent implements OnInit {
   newsItems: NewsItem[] = [
     {
-      title: "Max eats dirt again",
+      title: "Hallo",
       link: "http://nu.nl",
-      date: new Date('8/08/18')
+      description: "xd",
+      pubDate: "5/08/18",
+      guid: "",
+      "media:thumbnail": "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
     },
     {
-      title: "Zandvoort new GP track",
+      title: "Hallo",
       link: "http://nu.nl",
-      date: new Date('5/08/18')
+      description: "xd",
+      pubDate: "5/08/18",
+      guid: "",
+      "media:thumbnail": "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
     }
   ];
 
@@ -46,8 +56,8 @@ export class OverviewComponent implements OnInit {
 
   showNews() {
     this.newsService.getNews()
-      .subscribe(data => {
-        console.log(data);
+      .subscribe((data: any) => {
+        this.newsItems = data.rss.channel.item;
       });
   }
 
