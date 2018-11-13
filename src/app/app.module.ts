@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -25,6 +26,7 @@ import { PoolsComponent } from './pools/pools.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreatePoolComponent } from './create-pool/create-pool.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     LoginComponent,
     PoolsComponent,
     RegisterComponent,
-    CreatePoolComponent
+    CreatePoolComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatDialogModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
@@ -89,6 +93,8 @@ const appRoutes: Routes = [
   ],
   providers: [UserService, AuthGuard],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }

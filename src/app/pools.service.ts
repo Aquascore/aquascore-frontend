@@ -23,4 +23,8 @@ export class PoolsService {
   createPool(pool: Pool) {
     return this.http.post(`${environment.apiUrl}/pools/`, pool);
   }
+
+  removePool(pool: Pool) {
+    return this.http.delete(`${environment.apiUrl}/pools/${pool.id}`);
+  }
 }
