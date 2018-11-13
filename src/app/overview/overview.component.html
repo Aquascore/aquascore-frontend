@@ -3,7 +3,7 @@
     <h3>News</h3>
     <mat-list class="news-list" flex>
       <div *ngFor="let newsItem of newsItems">
-          <a href="{{newsItem.link}}">
+          <a href="{{newsItem.link}}" target="_blank">
               <mat-card class="news-article">
               <img class="thumbnail" src="{{newsItem['media:thumbnail'].url}}">
               <mat-card-content>
