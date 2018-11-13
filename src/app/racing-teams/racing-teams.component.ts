@@ -23,4 +23,9 @@ export class RacingTeamsComponent implements OnInit {
     this.racingTeamsService.deleteRacingTeam(teamid)
     .subscribe();
   }
+
+  deleteDriver(driverid : number){
+    this.racingTeamsService.deleteDriver(driverid)
+    .subscribe();
+  }
 }
