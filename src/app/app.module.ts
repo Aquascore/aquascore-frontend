@@ -20,6 +20,7 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PoolsComponent } from './pools/pools.component';
+import { RacingTeamsComponent } from './racing-teams/racing-teams.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -32,6 +33,7 @@ export const tokenGetter = () => localStorage.getItem('access_token');
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
+  { path: 'racing-teams', component: RacingTeamsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent }
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LoginComponent,
     PoolsComponent,
+    RacingTeamsComponent,
     RegisterComponent
   ],
   imports: [
