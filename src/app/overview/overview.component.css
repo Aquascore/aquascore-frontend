@@ -36,7 +36,8 @@ i {
 
 .thumbnail{ 
   display: inline-block;
-  width: px;
+  width: 280px;
+  height: 200px;
   position:relative;
 }
 
@@ -46,13 +47,26 @@ img {
 }
 
 .news-list {
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  overflow-x: auto;
 }
+
+::-webkit-scrollbar {
+  display: none;
+  }
 
 .news-article {
   float: left;
   margin-left: 2%;
   margin-bottom: 2em;
+  width: 280px;
+  height: 400px;
+}
+
+.newsTitle {
+  font-size: 18px;
 }
 
 .schedule {

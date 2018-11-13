@@ -1,16 +1,18 @@
 <mat-card class="section">
   <mat-card-content>
     <h3>News</h3>
-    <mat-list class="news-list">
+    <mat-list class="news-list" flex>
       <div *ngFor="let newsItem of newsItems">
-          <mat-card class="news-article">
-            <img src="https://via.placeholder.com/300x200">
-            <mat-card-content>
-              <mat-card-title>{{newsItem.title}}</mat-card-title>
-              <mat-card-subtitle>{{newsItem.date | date}}</mat-card-subtitle>
-              <p>Test</p>
-            </mat-card-content>
-          </mat-card>
+          <a href="{{newsItem.link}}">
+              <mat-card class="news-article">
+              <img class="thumbnail" src="{{newsItem['media:thumbnail'].url}}">
+              <mat-card-content>
+                <mat-card-title class="newsTitle">{{newsItem.title}}</mat-card-title>
+                <mat-card-subtitle>{{newsItem.pubDate}}</mat-card-subtitle>
+                <p>{{newsItem.description}}</p>
+              </mat-card-content>
+            </mat-card>
+          </a>
       </div>
     </mat-list>
   </mat-card-content>
