@@ -27,6 +27,14 @@ export interface Team{
       return this.http.get(`${environment.apiUrl}/teams/`);
     }
 
+    createRacingTeam(team: Team){
+      return this.http.post(`${environment.apiUrl}/teams/`, team);
+    }
+
+    editRacingTeam(team: Team){
+      return this.http.patch(`${environment.apiUrl}/teams/`, team);
+    }
+
     deleteRacingTeam(teamid: number) {
       return this.http.delete(`${environment.apiUrl}/teams/` + teamid);
     }
@@ -35,5 +43,11 @@ export interface Team{
       return this.http.delete(`${environment.apiUrl}/drivers/` + driverid);
     }
 
-    // Meer
+    createDriver(driver: Driver){
+      return this.http.post(`${environment.apiUrl}/drivers/`, driver);
+    }
+
+    editDriver(driver: Driver){
+      return this.http.patch(`${environment.apiUrl}/drivers/`, driver);
+    }
   }
