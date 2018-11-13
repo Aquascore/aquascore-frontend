@@ -9,3 +9,12 @@
 .clear {
   clear: both;
 }
+
+.owner-menu {
+  padding-left: 10px;
+}
+
+.remove-pool {
+  cursor: pointer;
+  vertical-align: baseline;
+}

@@ -11,7 +11,14 @@
   <div class="clear"></div>
 
   <div class="pool" *ngFor="let pool of userPools">
-    <h3>{{pool.name}}</h3>
+    <h3>
+      {{pool.name}}
+      <span *ngIf="isOwner(pool)" class="owner-menu">
+        <i class="material-icons remove-pool" (click)="confirmDeletePool(pool)">
+          delete
+        </i>
+      </span>
+    </h3>
 
     <table mat-table [dataSource]="pool.users" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
