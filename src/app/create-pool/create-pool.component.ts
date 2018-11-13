@@ -4,8 +4,8 @@ import { UserService, User } from '../user.service';
 import { MatChipInputEvent } from '@angular/material';
 import { ViewChild, ElementRef } from '@angular/core';
 import { Pool, PoolsService } from '../pools.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-pool',
@@ -24,7 +24,7 @@ export class CreatePoolComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private poolsService: PoolsService,
-    private flashService: FlashMessagesService) { }
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userService.getCurrentUser()
@@ -45,7 +45,9 @@ export class CreatePoolComponent implements OnInit {
     this.poolsService.createPool(pool)
       .subscribe(
         _ => {
-          this.flashService.show('yep', { cssClass: 'alert-success' });
+          this.toastr.success(`Pool ${pool.name} succesfully created!`, '', {
+            timeOut: 3000
+          });
           this.router.navigateByUrl('/pools');
         },
         error => {

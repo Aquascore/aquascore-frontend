@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
-    private flashService: FlashMessagesService) { }
+   private toastr: ToastrService) { }
 
   ngOnInit() { }
 
@@ -32,7 +32,9 @@ export class RegisterComponent implements OnInit {
     this.userService.signUp(formUser)
       .subscribe(
         _ => {
-          this.flashService.show('yep', { cssClass: 'alert-success' });
+          this.toastr.success('Sign up succesful!', '', {
+            timeOut: 3000
+          });
           this.router.navigateByUrl('/login');
         },
         error => {
