@@ -18,4 +18,9 @@ export class RacingTeamsComponent implements OnInit {
         this.racingTeams = teams;
       });
   }
+
+  deleteRacingTeam(teamid: number){
+    this.racingTeamsService.deleteRacingTeam(teamid)
+    .subscribe();
+  }
 }
