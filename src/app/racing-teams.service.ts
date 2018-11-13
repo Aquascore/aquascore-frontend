@@ -27,5 +27,9 @@ export interface Team{
       return this.http.get(`${environment.apiUrl}/teams/`);
     }
 
+    deleteRacingTeam(teamid: number) {
+      return this.http.delete(`${environment.apiUrl}/teams/` + teamid + '/');
+    }
+
     // Meer
   }
