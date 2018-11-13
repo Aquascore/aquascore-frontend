@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 import { Formula1NewsService } from '../formula1-news.service';
 import {lookup} from 'country-data';
+
+import { CalendarComponent } from 'ng-fullcalendar';
+import { Options } from 'fullcalendar';
 
 export interface NewsItem {
   title: string;
@@ -22,6 +25,7 @@ export interface Race {
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
+
   newsItems: NewsItem[] = [
     {
       title: "Max eats dirt again",
@@ -37,11 +41,30 @@ export class OverviewComponent implements OnInit {
 
   races: Race[] = [];
 
+  calendarOptions: Options;
+  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+
+  data = [];
+
   constructor(private rsService: RaceScheduleService, private newsService: Formula1NewsService) { }
 
   ngOnInit() {
     this.showNews();
     this.showRaceSchedule();
+    this.displayCalendar();
+  }
+
+  displayCalendar(){
+    this.calendarOptions = {
+        editable: true,
+        eventLimit: false,
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        events: this.data
+      };
   }
 
   showNews() {

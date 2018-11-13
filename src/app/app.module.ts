@@ -15,6 +15,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
+import { FullCalendarModule } from 'ng-fullcalendar';
+
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -64,6 +66,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    FullCalendarModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }

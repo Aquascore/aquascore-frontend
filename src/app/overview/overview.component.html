@@ -3,14 +3,14 @@
     <h3>News</h3>
     <mat-list class="news-list">
       <div *ngFor="let newsItem of newsItems">
-          <mat-card class="news-article">
-            <img src="https://via.placeholder.com/300x200">
-            <mat-card-content>
-              <mat-card-title>{{newsItem.title}}</mat-card-title>
-              <mat-card-subtitle>{{newsItem.date | date}}</mat-card-subtitle>
-              <p>Test</p>
-            </mat-card-content>
-          </mat-card>
+        <mat-card class="news-article">
+          <img src="https://via.placeholder.com/300x200">
+          <mat-card-content>
+            <mat-card-title>{{newsItem.title}}</mat-card-title>
+            <mat-card-subtitle>{{newsItem.date | date}}</mat-card-subtitle>
+            <p>Test</p>
+          </mat-card-content>
+        </mat-card>
       </div>
     </mat-list>
   </mat-card-content>
@@ -43,4 +43,8 @@
       <div class='race-time'>{{race.date | date}} : {{race.time}}</div>
     </div>
   </div>
+</div>
+
+<div *ngIf="calendarOptions">
+  <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
 </div>
