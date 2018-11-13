@@ -16,6 +16,10 @@ export class TopMenuComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
+    this.reloadPools();
+  }
+
+  reloadPools() {
     this.poolsService.getUserPools()
       .subscribe((pools: Pool[]) => {
         this.userPools = pools;

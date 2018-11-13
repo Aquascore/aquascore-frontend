@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-
-export interface User {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-}
+import { User } from './user.service';
 
 export interface Pool {
   id: number;
@@ -24,5 +18,9 @@ export class PoolsService {
 
   getUserPools() {
     return this.http.get(`${environment.apiUrl}/pools/`);
+  }
+
+  createPool(pool: Pool) {
+    return this.http.post(`${environment.apiUrl}/pools/`, pool);
   }
 }

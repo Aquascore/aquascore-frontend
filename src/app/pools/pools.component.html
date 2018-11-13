@@ -1,4 +1,15 @@
 <div class="pools">
+  <a routerLink="/pools/create">
+    <button mat-raised-button color="primary" type="button" class="create-pool">
+      CREATE POOL
+      <i class="material-icons">
+        add
+      </i>
+    </button>
+  </a>
+
+  <div class="clear"></div>
+
   <div class="pool" *ngFor="let pool of userPools">
     <h3>{{pool.name}}</h3>
 

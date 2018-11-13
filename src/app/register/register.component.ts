@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
     Validators.email,
   ]);
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private userService: UserService,
     private flashService: FlashMessagesService) { }
 

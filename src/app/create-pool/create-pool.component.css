@@ -1,0 +1,12 @@
+.full-width {
+  width: 100%;
+}
+
+.remove-member {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.members {
+  margin-bottom: 10px;
+}

@@ -14,6 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -22,6 +24,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PoolsComponent } from './pools/pools.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CreatePoolComponent } from './create-pool/create-pool.component';
 
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
@@ -32,6 +35,7 @@ export const tokenGetter = () => localStorage.getItem('access_token');
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
+  { path: 'pools/create', component: CreatePoolComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent }
@@ -45,7 +49,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LoginComponent,
     PoolsComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreatePoolComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatAutocompleteModule,
+    MatChipsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }

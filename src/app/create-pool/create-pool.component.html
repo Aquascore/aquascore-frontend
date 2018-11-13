@@ -1,0 +1,38 @@
+<h2>Create a pool</h2>
+<mat-card>
+  <mat-card-content>
+    <form #poolForm="ngForm" (ngSubmit)="createPool(poolForm)" id="create-pool">
+      <mat-form-field class="full-width" color="accent">
+        <input name="name" matInput placeholder="Name" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <mat-chip-list #memberList>
+          <mat-chip *ngFor="let member of members">
+            <span>{{ member.first_name }} {{ member.last_name }} ({{ member.email }})</span>
+            <i class="material-icons remove-member" (click)="removeMember(member)">
+              cancel
+            </i>
+          </mat-chip>
+          <input
+            #memberInput
+            placeholder="New member"
+            aria-label="Members"
+            [matAutocomplete]="auto"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="searchQuery"
+            (keyup)="searchUsers()"
+            [matChipInputFor]="memberList">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let user of searchResults" (click)="addMember(user, $event)">
+            <span>{{ user.first_name }} {{ user.last_name }} ({{ user.email }})</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary" type="submit">CREATE POOL</button>
+    </form>
+  </mat-card-content>
+</mat-card>

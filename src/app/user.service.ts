@@ -1,7 +1,14 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
+
+export interface User {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +18,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.loggedIn = !!localStorage.getItem('access_token');
+  }
+
+  getCurrentUser() {
+    return this.http.get(`${environment.apiUrl}/users/me`);
   }
 
   signUp(user) {
@@ -33,5 +44,10 @@ export class UserService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  search(query: string) {
+    const params = new HttpParams().set("query", query);
+    return this.http.get(`${environment.apiUrl}/users/find`, {params: params});
   }
 }

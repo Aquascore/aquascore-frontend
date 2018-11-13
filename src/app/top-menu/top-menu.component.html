@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <i class="material-icons menu-toggle" (click)="drawer.toggle()"
+  <i class="material-icons menu-toggle" (click)="drawer.toggle() && reloadPools()"
     *ngIf="userService.isLoggedIn()">
     menu
   </i>
@@ -21,7 +21,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <div class="content">
+  <div class="content container">
     <flash-messages></flash-messages>
     <router-outlet></router-outlet>
   </div>

@@ -1,3 +1,11 @@
 .pool table {
   width: 100%;
 }
+
+.create-pool {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
