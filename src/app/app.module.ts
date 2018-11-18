@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -75,6 +75,7 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatChipsModule,
     MatDialogModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
@@ -89,7 +90,6 @@ const appRoutes: Routes = [
         ]
       }
     }),
-    FlashMessagesModule.forRoot()
   ],
   providers: [UserService, AuthGuard],
 
