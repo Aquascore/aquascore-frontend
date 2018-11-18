@@ -9,3 +9,8 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
   background: black;
   color: #FFFFFF;
 }
+
+.mat-accent {
+  background: #e10600;
+  color: #FFFFFF;
+}
