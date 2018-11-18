@@ -26,22 +26,23 @@ export interface Race {
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
+
   newsItems: NewsItem[] = [
     {
-      title: "Hallo",
+      title: "Max eats dirt again",
       link: "http://nu.nl",
-      description: "xd",
-      pubDate: "5/08/18",
+      pubDate: "05/08/2018",
+      description: "Thank you Ocon!",
       guid: "",
-      "media:thumbnail": "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
+      ['media:thumbnail']: "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
     },
     {
-      title: "Hallo",
+      title: "Zandvoort new GP track",
       link: "http://nu.nl",
-      description: "xd",
-      pubDate: "5/08/18",
+      pubDate: "05/08/2018",
+      description: "Yeah boys!",
       guid: "",
-      "media:thumbnail": "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
+      ['media:thumbnail']: "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
     }
   ];
 
