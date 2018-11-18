@@ -161,7 +161,7 @@ export class CalendarComponent {
         for (let race of futureRaces) {
           this.events.push({
             start: subDays(new Date(race.date + "T" + race.time), 2),
-            end: addDays(new Date(race.date), 0),
+            end: addDays(new Date(race.date + "T" + race.time), 0),
             title: race.raceName,
             color: colors.red,
             actions: this.actions,
