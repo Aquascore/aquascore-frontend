@@ -1,62 +1,64 @@
-<!-- Begin calendar navigation -->
-<mat-grid-list cols="3" rowHeight="1:0.2">
-  <mat-grid-tile>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      mwlCalendarPreviousView
-      [view]="view"
-      [(viewDate)]="viewDate"
-      (viewDateChange)="activeDayIsOpen = false">
-      Previous
-    </button>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      mwlCalendarToday
-      [(viewDate)]="viewDate">
-      Today
-    </button>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      mwlCalendarNextView
-      [view]="view"
-      [(viewDate)]="viewDate"
-      (viewDateChange)="activeDayIsOpen = false">
-      Next
-    </button>
-  </mat-grid-tile>
+<!-- Begin website calendar navigation -->
+<h3 style="text-align: center;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
 
-  <mat-grid-tile>
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-  </mat-grid-tile>
-  
-  <mat-grid-tile>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      (click)="view = CalendarView.Month"
-      [class.active]="view === CalendarView.Month">
-      Month
-    </button>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      (click)="view = CalendarView.Week"
-      [class.active]="view === CalendarView.Week">
-      Week
-    </button>
-    <button
-      mat-raised-button color="accent"
-      style="margin-right: 2%"
-      (click)="view = CalendarView.Day"
-      [class.active]="view === CalendarView.Day">
-      Day
-    </button>
-  </mat-grid-tile>
-</mat-grid-list>
-<!-- End calendar navigation -->
+<div class="website-calendar">
+  <div class="website-flex">
+    <div class="web-column">
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Previous
+      </button>
+      <button
+        mat-raised-button color="primary"
+        class="button-alignment"
+        mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Today
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Next
+      </button>
+    </div>
+
+    <div class="web-column">
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Month"
+        [class.active]="view === CalendarView.Month">
+        Month
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Week"
+        [class.active]="view === CalendarView.Week">
+        Week
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Day"
+        [class.active]="view === CalendarView.Day">
+        Day
+      </button>
+    </div>
+  </div>
+</div>
+<!-- End website calendar navigation -->
+
+<br>
 
 <!-- Begin calendar itself -->
 <div class="calendar">
@@ -92,3 +94,62 @@
   </div>
 </div>
 <!-- End calendar itself -->
+
+<br>
+
+<div class="mobile-calendar">
+  <div class="mobile-flex">
+    <div class="mobile-column">
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Previous
+      </button>
+      <button
+        mat-raised-button color="primary"
+        class="button-alignment"
+        mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Today
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="activeDayIsOpen = false">
+        Next
+      </button>
+    </div>
+
+    <div class="mobile-column">
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Month"
+        [class.active]="view === CalendarView.Month">
+        Month
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Week"
+        [class.active]="view === CalendarView.Week">
+        Week
+      </button>
+      <button
+        mat-raised-button color="accent"
+        class="button-alignment"
+        (click)="view = CalendarView.Day"
+        [class.active]="view === CalendarView.Day">
+        Day
+      </button>
+    </div>
+  </div>
+</div>
+  <!-- End mobile calendar navigation -->
