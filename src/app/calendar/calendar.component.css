@@ -24,11 +24,11 @@
 .mobile-column {
   width: 100%;
   text-align: center;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 
 .button-alignment {
-  margin-right: 2%;
+  margin-right: 5%;
 }
 
 @media only screen and (max-width: 768px) {
