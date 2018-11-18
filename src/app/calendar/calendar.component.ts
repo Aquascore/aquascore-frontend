@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef
@@ -15,13 +16,16 @@ import {
   addHours
 } from 'date-fns';
 import { Subject } from 'rxjs';
+import { CustomEventTitleFormatter } from './custom-event-title-formatter.provider';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
+  CalendarEventTitleFormatter,
   CalendarView
 } from 'angular-calendar';
+import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 
 const colors: any = {
   red: {
@@ -38,14 +42,29 @@ const colors: any = {
   }
 };
 
+export interface Race {
+  raceName: string;
+  country: string;
+  date: Date;
+  time: string;
+}
+
 @Component({
   selector: 'app-calendar', // mwl-demo-component
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  providers: [
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: CustomEventTitleFormatter
+    }
+  ]
 })
 
 export class CalendarComponent {
+  races: Race[] = [];
+
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
 
@@ -79,49 +98,15 @@ export class CalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
+  
+  constructor(private modal: NgbModal, private rsService: RaceScheduleService) {}
 
-  constructor(private modal: NgbModal) {}
+  ngOnInit() {
+    this.showRaceSchedule();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -166,5 +151,28 @@ export class CalendarComponent {
       }
     });
     this.refresh.next();
+  }
+
+  showRaceSchedule() {
+    this.rsService.getSchedule()
+      .subscribe((data: RaceAPIResponse) => {
+        const futureRaces = data.MRData.RaceTable.Races
+
+        for (let race of futureRaces) {
+          this.events.push({
+            start: subDays(new Date(race.date + "T" + race.time), 2),
+            end: addDays(new Date(race.date), 0),
+            title: race.raceName,
+            color: colors.red,
+            actions: this.actions,
+            resizable: {
+              beforeStart: false,
+              afterEnd: false
+            },
+            draggable: false
+          });
+          this.refresh.next();
+        }
+      });
   }
 }
