@@ -53,7 +53,9 @@ const appRoutes: Routes = [
     LoginComponent,
     PoolsComponent,
     RacingTeamsComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreatePoolComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
