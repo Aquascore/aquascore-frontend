@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RacingTeamsService, Team } from '../racing-teams.service';
+import { RacingTeamsService, Team, Driver } from '../racing-teams.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-racingTeams',
@@ -11,7 +13,10 @@ export class RacingTeamsComponent implements OnInit {
   racingTeams: Team[];
   displayedColumns: string[] = ['name', 'salary', 'buttons'];
 
-  constructor(private racingTeamsService: RacingTeamsService, private router: Router) { }
+  constructor(
+    private racingTeamsService: RacingTeamsService, 
+    private router: Router,
+    public dialog: MatDialog) { }
 
   fetchData() {
     this.racingTeamsService.getRacingTeams()
@@ -24,25 +29,39 @@ export class RacingTeamsComponent implements OnInit {
     this.fetchData();
   }
 
-  deleteRacingTeam(teamid: number) {
-    this.racingTeamsService.deleteRacingTeam(teamid)
-      .subscribe(
-        () => {
+  confirmDeleteRacingTeam(team: Team) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '600',
+      data: {
+        confirmMessage: `Are you sure you want to delete the racing-team ${team.name}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(deleteTeam => {
+      if(deleteTeam) {
+        this.racingTeamsService.deleteRacingTeam(team.id)
+        .subscribe(_ => {
           this.fetchData();
-        }, error => {
-          console.log(error.message);
-        }
-      );
+        });
+      }
+    });
   }
 
-  deleteDriver(driverid: number) {
-    this.racingTeamsService.deleteDriver(driverid)
-      .subscribe(
-        () => {
+  confirmDeleteDriver(driver: Driver) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '600',
+      data: {
+        confirmMessage: `Are you sure you want to delete the driver ${driver.first_name} ${driver.last_name}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(deleteDriver => {
+      if(deleteDriver) {
+        this.racingTeamsService.deleteDriver(driver.id)
+        .subscribe(_ => {
           this.fetchData();
-        }, error => {
-          console.log(error.message);
-        }
-      );
+        });
+      }
+    });
   }
 }

@@ -1,11 +1,37 @@
 <div class="racing-teams">
-    <button mat-raised button (click)="createRacingTeam(team.id)">Create</button>
+    <div class="create">
+        <a routerLink="racing-teams/create">
+            <button mat-raised-button color="primary" type="button" class="pull-right">
+                Create Racing-team
+                <i class="material-icons">
+                    add
+                </i>
+            </button>
+        </a>
+        <a routerLink="racing-teams/createDriver">
+            <button mat-raised-button color="primary" type="button" class="pull-right" style="margin-right: 8px">
+                Create Driver
+                <i class="material-icons">
+                    add
+                </i>
+            </button>
+        </a>
+    </div>
     <div class="team" *ngFor="let team of racingTeams">
-        <span>
-            <h3>{{team.name}}</h3>
-            <a href="#" (click)="editRacingTeam(team.id)">Edit</a> |
-            <a href="#" (click)="deleteRacingTeam(team.id)">Delete</a>
-        </span>
+
+        <h3>
+            {{team.name}}
+            <span class="padLeft">
+                <i class="material-icons remove-team" (click)="editRacingTeam(team.id)">
+                    edit
+                </i>
+            </span>
+            <span class="padLeft">
+                <i class="material-icons remove-team" (click)="confirmDeleteRacingTeam(team)">
+                    delete
+                </i>
+            </span>
+        </h3>
 
         <table mat-table [dataSource]="team.drivers" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
@@ -21,8 +47,16 @@
             <ng-container matColumnDef="buttons">
                 <th mat-header-cell *matHeaderCellDef> </th>
                 <td mat-cell *matCellDef="let element">
-                    <a href="#" (click)="editDriver(element.id)">Edit</a> |
-                    <a href="#" (click)="deleteDriver(element.id)">Delete</a>
+                    <span class="padLeft">
+                        <i class="material-icons remove-team" (click)="editDriver(element)">
+                            edit
+                        </i>
+                    </span>
+                    <span class="padLeft">
+                        <i class="material-icons remove-team" (click)="confirmDeleteDriver(element)">
+                            delete
+                        </i>
+                    </span>
                 </td>
             </ng-container>
 

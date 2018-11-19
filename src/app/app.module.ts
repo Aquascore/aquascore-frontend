@@ -27,6 +27,7 @@ import { RacingTeamsComponent } from './racing-teams/racing-teams.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreatePoolComponent } from './create-pool/create-pool.component';
+import { CreateRacingTeamComponent } from './create-racing-teams/create-racing-teams.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { environment } from '../environments/environment';
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     RacingTeamsComponent,
     RegisterComponent,
     CreatePoolComponent,
+    CreateRacingTeamComponent,
     ConfirmDialogComponent
   ],
   imports: [
