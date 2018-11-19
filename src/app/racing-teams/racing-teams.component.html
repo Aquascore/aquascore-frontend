@@ -1,9 +1,10 @@
 <div class="racing-teams">
+    <button mat-raised button (click)="createRacingTeam(team.id)">Create</button>
     <div class="team" *ngFor="let team of racingTeams">
         <span>
             <h3>{{team.name}}</h3>
-            <button mat-raised-button (click)="editRacingTeam(team.id)">Edit</button>
-            <button mat-raised-button (click)="deleteRacingTeam(team.id)">Delete</button>
+            <a href="#" (click)="editRacingTeam(team.id)">Edit</a> |
+            <a href="#" (click)="deleteRacingTeam(team.id)">Delete</a>
         </span>
 
         <table mat-table [dataSource]="team.drivers" class="mat-elevation-z8">
@@ -20,8 +21,8 @@
             <ng-container matColumnDef="buttons">
                 <th mat-header-cell *matHeaderCellDef> </th>
                 <td mat-cell *matCellDef="let element">
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a>
+                    <a href="#" (click)="editDriver(element.id)">Edit</a> |
+                    <a href="#" (click)="deleteDriver(element.id)">Delete</a>
                 </td>
             </ng-container>
 
