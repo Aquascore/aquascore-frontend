@@ -1,0 +1,11 @@
+.racing-teams Table{
+    width: 100%;
+}
+
+.pull-right{
+    float: right;
+}
+
+.pull-left{
+    float: left;
+}

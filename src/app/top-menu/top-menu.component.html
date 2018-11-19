@@ -16,6 +16,7 @@
           <a mat-list-item routerLink="/pool/{{pool.id}}" (click)="drawer.toggle()">{{pool.name}}</a>
         </div>
       </mat-list>
+      <a mat-list-item routerLink="/racing-teams" (click)="drawer.toggle()">Racing Teams</a>
       <a mat-list-item routerLink="/calendar" (click)="drawer.toggle()">Calendar</a>
       <a mat-list-item (click)="drawer.toggle() && logOut()">Log out</a>
     </mat-nav-list>
