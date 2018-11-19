@@ -52,6 +52,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     LoginComponent,
     PoolsComponent,
+    RacingTeamsComponent,
     RegisterComponent
   ],
   imports: [
