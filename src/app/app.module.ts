@@ -39,6 +39,7 @@ export const tokenGetter = () => localStorage.getItem('access_token');
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
+  { path: 'pools/create', component: CreatePoolComponent, canActivate: [AuthGuard] },
   { path: 'racing-teams', component: RacingTeamsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

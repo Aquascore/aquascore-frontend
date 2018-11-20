@@ -27,24 +27,7 @@ export interface Race {
 })
 export class OverviewComponent implements OnInit {
 
-  newsItems: NewsItem[] = [
-    {
-      title: "Max eats dirt again",
-      link: "http://nu.nl",
-      pubDate: "05/08/2018",
-      description: "Thank you Ocon!",
-      guid: "",
-      ['media:thumbnail']: "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
-    },
-    {
-      title: "Zandvoort new GP track",
-      link: "http://nu.nl",
-      pubDate: "05/08/2018",
-      description: "Yeah boys!",
-      guid: "",
-      ['media:thumbnail']: "http://c.files.bbci.co.uk/BFC1/production/_104298094_gettyimages-1060245106.jpg"
-    }
-  ];
+  newsItems: NewsItem[] = [];
 
   races: Race[] = [];
 
