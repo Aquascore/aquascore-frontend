@@ -4,10 +4,10 @@ import { environment } from '../environments/environment';
 
 export interface Driver{
     id: number;
-    first_name: String;
-    last_name: String;
+    firstname: String;
+    lastname: String;
     salary: number;
-    team_id: number;
+    teamid: number;
 }
 
 export interface Team{

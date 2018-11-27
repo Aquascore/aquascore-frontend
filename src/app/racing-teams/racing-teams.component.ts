@@ -51,7 +51,7 @@ export class RacingTeamsComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '600',
       data: {
-        confirmMessage: `Are you sure you want to delete the driver ${driver.first_name} ${driver.last_name}?`
+        confirmMessage: `Are you sure you want to delete the driver ${driver.firstname} ${driver.lastname}?`
       }
     });
 

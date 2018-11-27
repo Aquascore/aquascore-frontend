@@ -1,0 +1,29 @@
+
+<h2>Create a driver</h2>
+<mat-card>
+  <mat-card-content>
+    <form #driverForm="ngForm" (ngSubmit)="createDriver(driverForm)" id="create-driver">
+      <mat-form-field class="full-width" color="accent">
+        <input name="firstname" matInput placeholder="Firstname" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <input name="lastname" matInput placeholder="Lastname" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <input name="salary" type="number" matInput placeholder="Salary" ngModel required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <mat-select placeholder="Racing-team" name="teamid" ngModel required>
+          <mat-option *ngFor="let team of teams" [value]="team.id">
+            {{team.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">CREATE DRIVER</button>
+    </form>
+  </mat-card-content>
+</mat-card>
