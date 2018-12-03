@@ -1,46 +1,41 @@
 <mat-card class="section">
-    <mat-card-content>
-      <h3>Select Team</h3>
-      <div *ngFor="let betItem of Bets">
-        <mat-expansion-panel>
-  
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{betItem.title}}</mat-panel-title>
-                <mat-panel-description>Points to earn: {{betItem.points}}</mat-panel-description>
-            </mat-expansion-panel-header>
-          
-            <p>This is the primary content of the panel.</p>
-      
-          </mat-expansion-panel>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <h3>Select the pool you're betting for</h3>
+  <mat-form-field color="accent" style="width: 100%;">
+    <mat-select placeholder="Select a pool" [formControl]="poolControl" required>
+      <mat-option *ngFor="let pool of userPools" [value]="pool.name">
+        {{pool.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="poolControl.hasError('required')">Please choose a pool!</mat-error>
+  </mat-form-field>
+</mat-card>
 
 <br>
 
 <mat-card class="section">
   <mat-card-content>
-    <h3>Overview</h3>
-    <div *ngFor="let betItem of Bets">
+    <h3>Bet Overview</h3>
+    <form #betForm="ngForm">
+    <div style="margin-bottom: 1em;" *ngFor="let betItem of Bets; let i = index">
       <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{betItem.title}}</mat-panel-title>
+          <mat-panel-description>Points to earn: {{betItem.points}}</mat-panel-description>
+        </mat-expansion-panel-header>
 
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{betItem.title}}</mat-panel-title>
-            <mat-panel-description>Points to earn: {{betItem.points}}</mat-panel-description>
-          </mat-expansion-panel-header>
-
-          <mat-divider [inset]="true"></mat-divider>
-          <h4>Select driver</h4>
+        <mat-divider [inset]="true"></mat-divider>
+        <h4>Select driver</h4>
           <mat-form-field color="accent" style="width: 100%;">
-            <mat-select placeholder="Select driver" [formControl]="driverControl" required>
+            <mat-select placeholder="Select driver" required>
               <mat-option *ngFor="let driver of drivers" [value]="driver">
                 {{driver.first_name}} {{driver.last_name}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="driverControl.hasError('required')">Please choose a driver!</mat-error>
           </mat-form-field>
-    
-        </mat-expansion-panel>
+      </mat-expansion-panel>
     </div>
+    <button mat-raised-button type="submit" style="width: 100%;" color="accent" [disabled]="betForm.invalid">Submit bets</button>
+  </form>
   </mat-card-content>
 </mat-card>

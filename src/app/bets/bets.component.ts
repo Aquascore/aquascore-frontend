@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BetsService } from '../bets.service';
-import {FormControl, Validators} from '@angular/forms';
+import { PoolsService, Pool } from '../pools.service';
+import {FormControl, Validators, NgForm} from '@angular/forms';
 
 export interface BetItem {
   id: number;
@@ -22,7 +23,6 @@ export class BetsComponent implements OnInit {
 
   Bets: BetItem[] = [];
 
-  driverControl = new FormControl('', [Validators.required]);
   drivers: Driver[] = [
     {first_name: 'Lewis', last_name: 'Hamilton'},
     {first_name: 'Valteri', last_name: 'Bottas'},
@@ -30,16 +30,31 @@ export class BetsComponent implements OnInit {
     {first_name: 'Max', last_name: 'Verstappen'},
   ];
 
-  constructor(private betsService: BetsService) { }
+  driverControl = new FormControl('', [Validators.required]);
+  poolControl = new FormControl('', [Validators.required]);
+  userPools: Pool[] = [
+  ];
+
+  selectedPool: Boolean;
+
+  constructor(private betsService: BetsService, private poolsService: PoolsService) { }
 
   ngOnInit() {
     this.showBets();
+    this.receivePools();
   }
 
   showBets() {
     this.betsService.getBets()
       .subscribe((data: any) => {
         this.Bets = data;
+      });
+  }
+
+  receivePools() {
+    this.poolsService.getUserPools()
+      .subscribe((pools: Pool[]) => {
+        this.userPools = pools;
       });
   }
 
