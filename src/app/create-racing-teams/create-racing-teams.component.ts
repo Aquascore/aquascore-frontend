@@ -14,10 +14,34 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateRacingTeamComponent implements OnInit {
 
   constructor(
-    private racingTeamsService: RacingTeamsService, 
+    private racingTeamsService: RacingTeamsService,
+    private toastr: ToastrService,
     private router: Router) { }
 
-    ngOnInit(){
-      
-    }
+  ngOnInit() {
+
+  }
+
+  createRacingTeam(form: NgForm) {
+    if (!form.valid) return;
+
+    const team: Team = {} as Team;
+    team.name = form.value.name;
+    team.teamcol = form.value.teamcol;
+
+    console.log(team);
+
+    this.racingTeamsService.createRacingTeam(team)
+      .subscribe(
+        _ => {
+          this.toastr.success(`RacingTeam ${team.name} succesfully created!`, '', {
+            timeOut: 3000
+          });
+          this.router.navigateByUrl('/racing-teams')
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 }

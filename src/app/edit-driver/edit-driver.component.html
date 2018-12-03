@@ -1,0 +1,29 @@
+
+<h2>Edit a driver</h2>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="driverForm" (ngSubmit)="editDriver()" id="edit-driver">
+      <mat-form-field class="full-width" color="accent">
+        <input name="firstname" matInput placeholder="Firstname" formControlName="firstname" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <input name="lastname" matInput placeholder="Lastname" formControlName="lastname" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <input name="salary" type="number" matInput placeholder="Salary" formControlName="salary" required>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" color="accent">
+        <mat-select placeholder="Racing-team" name="teamid" formControlName="teamid" required>
+          <mat-option *ngFor="let team of teams" [value]="team.id">
+            {{team.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!driverForm.valid">SAVE CHANGES</button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -100,6 +100,8 @@ export class CalendarComponent {
   events: CalendarEvent[] = [
   ];
 
+  excludeDays: number[] = [1, 2, 3, 4];
+
   activeDayIsOpen: boolean = false;
   
   constructor(private modal: NgbModal, private rsService: RaceScheduleService) {}

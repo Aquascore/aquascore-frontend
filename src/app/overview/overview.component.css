@@ -151,7 +151,7 @@ race-name:before {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   #mobile-races {
-    display: inline;
+    display: block;
   }
 
   #website-races {
@@ -166,6 +166,6 @@ race-name:before {
   }
 
   #website-races {
-    display: inline;
+    display: block;
   }
 }
