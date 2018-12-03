@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RacingTeamsService, Team, Driver } from '../racing-teams.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { Router, NavigationExtras } from '@angular/router';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class RacingTeamsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'salary', 'buttons'];
 
   constructor(
-    private racingTeamsService: RacingTeamsService, 
+    private racingTeamsService: RacingTeamsService,
     private router: Router,
     public dialog: MatDialog) { }
 
@@ -29,6 +29,14 @@ export class RacingTeamsComponent implements OnInit {
     this.fetchData();
   }
 
+  editDriver(driver: Driver) {
+    this.router.navigate(['/racing-teams/editDriver', driver.id]);
+  }
+
+  editRacingTeam(team: Team) {
+    this.router.navigate(['/racing-teams/edit', team.id]);
+  }
+
   confirmDeleteRacingTeam(team: Team) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '600',
@@ -38,11 +46,11 @@ export class RacingTeamsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(deleteTeam => {
-      if(deleteTeam) {
+      if (deleteTeam) {
         this.racingTeamsService.deleteRacingTeam(team.id)
-        .subscribe(_ => {
-          this.fetchData();
-        });
+          .subscribe(_ => {
+            this.fetchData();
+          });
       }
     });
   }
@@ -56,11 +64,11 @@ export class RacingTeamsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(deleteDriver => {
-      if(deleteDriver) {
+      if (deleteDriver) {
         this.racingTeamsService.deleteDriver(driver.id)
-        .subscribe(_ => {
-          this.fetchData();
-        });
+          .subscribe(_ => {
+            this.fetchData();
+          });
       }
     });
   }

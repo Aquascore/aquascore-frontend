@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 
 export interface Driver{
@@ -27,12 +28,16 @@ export interface Team{
       return this.http.get(`${environment.apiUrl}/teams/`);
     }
 
+    getRacingTeam(id: number){
+      return this.http.get(`${environment.apiUrl}/teams/` + id);
+    }
+
     createRacingTeam(team: Team){
       return this.http.post(`${environment.apiUrl}/teams/`, team);
     }
 
-    editRacingTeam(team: Team){
-      return this.http.patch(`${environment.apiUrl}/teams/`, team);
+    editRacingTeam(id: number, team: Team){
+      return this.http.patch(`${environment.apiUrl}/teams/` + id, team);
     }
 
     deleteRacingTeam(teamid: number) {
@@ -47,7 +52,11 @@ export interface Team{
       return this.http.post(`${environment.apiUrl}/drivers/`, driver);
     }
 
-    editDriver(driver: Driver){
-      return this.http.patch(`${environment.apiUrl}/drivers/`, driver);
+    getDriver(id: number){
+      return this.http.get(`${environment.apiUrl}/drivers/` + id);
+    }
+
+    editDriver(id: number, driver: Driver){
+      return this.http.patch(`${environment.apiUrl}/drivers/` + id, driver);
     }
   }

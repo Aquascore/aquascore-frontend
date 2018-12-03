@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RacingTeamsService, Team, Driver } from '../racing-teams.service';
-import { MatChipInputEvent } from '@angular/material';
-import { ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,9 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateDriverComponent implements OnInit {
 
   teams: Team[] = [];
-
-  @ViewChild('teamInput') teamInput: ElementRef<HTMLInputElement>;
-
+  
   constructor(
     private router: Router,
     private racingTeamService: RacingTeamsService,

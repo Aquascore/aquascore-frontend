@@ -23,7 +23,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">CREATE DRIVER</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!driverForm.valid">CREATE DRIVER</button>
     </form>
   </mat-card-content>
 </mat-card>

@@ -35,6 +35,8 @@ import { RegisterComponent } from './register/register.component';
 import { CreatePoolComponent } from './create-pool/create-pool.component';
 import { CreateRacingTeamComponent } from './create-racing-teams/create-racing-teams.component';
 import { CreateDriverComponent } from './create-driver/create-driver.component';
+import { EditRacingTeamsComponent } from './edit-racing-teams/edit-racing-teams.component';
+import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { environment } from '../environments/environment';
@@ -50,7 +52,9 @@ const appRoutes: Routes = [
   { path: 'pools/create', component: CreatePoolComponent, canActivate: [AuthGuard] },
   { path: 'racing-teams', component: RacingTeamsComponent, canActivate: [AuthGuard] },
   { path: 'racing-teams/create', component: CreateRacingTeamComponent, canActivate: [AuthGuard]},
+  { path: 'racing-teams/edit/:id', component: EditRacingTeamsComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/createDriver', component: CreateDriverComponent, canActivate: [AuthGuard]},
+  { path: 'racing-teams/editDriver/:id', component: EditDriverComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
@@ -72,6 +76,8 @@ const appRoutes: Routes = [
     ConfirmDialogComponent,
     CalendarComponent,
     CreateDriverComponent,
+    EditDriverComponent,
+    EditRacingTeamsComponent,
   ],
   imports: [
     BrowserModule,
