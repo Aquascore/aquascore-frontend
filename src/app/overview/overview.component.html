@@ -18,7 +18,7 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card id="mobile-races" class="section">
+<mat-card id="mobile-races" class="section" *ngIf="races.length > 0">
   <h3>Upcoming races</h3>
   <mat-card-content class="upcoming-races">
     <mat-divider></mat-divider>
@@ -33,7 +33,7 @@
   </mat-card-content>
 </mat-card>
 
-<div id="website-races">
+<div id="website-races" *ngIf="races.length > 0">
   <h3>Upcoming races</h3>
   <div class='schedule'>
     <div class='race' *ngFor="let race of races; let i = index">
