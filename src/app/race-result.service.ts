@@ -11,17 +11,30 @@ export interface Circuit {
   Location: Location;
 }
 
-export interface DriverResult{
-  position : number;
-  points : number;
-  familyName: string;
-  givenName: string;
+export interface Driver {
   code: string;
+  givenName: string;
+  familyName: string;
+}
+
+export interface Constructor {
+  name: string;
+}
+
+export interface Time {
   time: string;
-  laps : number;
 }
 
 export interface Result {
+  position: string;
+  points: string;
+  Driver: Driver;
+  constructor: Constructor;
+  time: Time;
+  laps: string;
+}
+
+export interface Race {
   season: string;
   round: string;
   url: string;
@@ -29,15 +42,15 @@ export interface Result {
   Circuit: Circuit;
   date: string;
   time: string;
-  results : DriverResult[]
+  Results : Result[];
 }
 
-export interface ResultTable {
-  Results: Result[];
+export interface RaceTable {
+  Races: Race[];
 }
 
 export interface MRData {
-  ResultTable: ResultTable;
+  RaceTable: RaceTable;
 }
 
 export interface RaceAPIResponse {
