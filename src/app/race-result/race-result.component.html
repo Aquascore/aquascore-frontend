@@ -1,44 +1,59 @@
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        2018
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-  </mat-expansion-panel>
-</mat-accordion>
+<h3 class="GP-title">GP TITLE HERE</h3>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- NAVIGATION BUTTONS -->
+<div class="website-buttons">
+  <div class="website-flex">
+    <div class="web-column">
+      <button mat-raised-button color="accent" class="button-alignment">Previous Race</button>
+      <button mat-raised-button color="primary" class="button-alignment">Current Race</button>
+      <button mat-raised-button color="accent" class="button-alignment">Next Race</button>
+    </div>
+  </div>
+</div>
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+<div class="mobile-buttons">
+  <div class="mobile-flex">
+    <div class="mobile-column">
+      <button mat-raised-button color="accent" class="mobile-button-alignment">Previous Race</button>
+      <button mat-raised-button color="primary" class="mobile-button-alignment">Current Race</button>
+      <button mat-raised-button color="accent" class="mobile-button-alignment">Next Race</button>
+    </div>
+  </div>
+</div>
 
-  <!-- Position Column -->
+<!-- TABLE WITH DATA OF THE RACES -->
+<mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <mat-header-cell *matHeaderCellDef> POSITION </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.position}} </mat-cell>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> CODE </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.code}} </mat-cell>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  <ng-container matColumnDef="driver">
+    <mat-header-cell *matHeaderCellDef> DRIVER </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.givenName}} {{df.familyName}} </mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  <ng-container matColumnDef="constructor">
+    <mat-header-cell *matHeaderCellDef> CONSTRUCTOR </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.constructor}} </mat-cell>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <ng-container matColumnDef="laps">
+    <mat-header-cell *matHeaderCellDef> LAPS </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.laps}} </mat-cell>
+  </ng-container>
 
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> TIME </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.time}} </mat-cell>
+  </ng-container>
 
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

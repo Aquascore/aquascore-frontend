@@ -22,6 +22,7 @@ export interface Constructor {
 }
 
 export interface Time {
+  millis: string;
   time: string;
 }
 
@@ -29,9 +30,9 @@ export interface Result {
   position: string;
   points: string;
   Driver: Driver;
-  constructor: Constructor;
-  time: Time;
+  Constructor: Constructor;
   laps: string;
+  Time: Time;
 }
 
 export interface Race {
@@ -41,7 +42,6 @@ export interface Race {
   raceName: string;
   Circuit: Circuit;
   date: string;
-  time: string;
   Results : Result[];
 }
 
@@ -67,7 +67,7 @@ export class RaceResultService {
 
   constructor(private http: HttpClient) { }
 
-  getResults() {
-    return this.http.get<RaceAPIResponse>(`${this.API_URL}/current/results.json`);
+  getResults(year, round) {
+    return this.http.get<RaceAPIResponse>(`${this.API_URL}/`+ year + `/`+ round + `/results.json`);
   }
 }
