@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { BetsService } from '../bets.service';
 import { PoolsService, Pool } from '../pools.service';
-import {FormControl, Validators, NgForm} from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface BetItem {
   id: number;
   title: string;
   points: number;
+}
+
+export interface Bet {
+  betId: number;
+  userId: number;
+  bet: String;
 }
 
 export interface Driver {
@@ -30,14 +38,20 @@ export class BetsComponent implements OnInit {
     {first_name: 'Max', last_name: 'Verstappen'},
   ];
 
-  driverControl = new FormControl('', [Validators.required]);
-  poolControl = new FormControl('', [Validators.required]);
   userPools: Pool[] = [
   ];
 
-  selectedPool: Boolean;
+  bet: Bet;
 
-  constructor(private betsService: BetsService, private poolsService: PoolsService) { }
+  betForm = new FormGroup({
+    poolName: new FormControl(''),
+  })
+
+  constructor(
+     private betsService: BetsService,
+     private poolsService: PoolsService, 
+     private toastr: ToastrService,
+     private router: Router) { }
 
   ngOnInit() {
     this.showBets();
@@ -48,6 +62,9 @@ export class BetsComponent implements OnInit {
     this.betsService.getBets()
       .subscribe((data: any) => {
         this.Bets = data;
+        for (let Data of data) {
+          this.betForm.addControl(Data.id, new FormControl(''));
+        }
       });
   }
 
@@ -55,6 +72,20 @@ export class BetsComponent implements OnInit {
     this.poolsService.getUserPools()
       .subscribe((pools: Pool[]) => {
         this.userPools = pools;
+      });
+  }
+
+  addBet() {
+    this.betsService.createBet(this.bet)
+      .subscribe(_ => {
+        this.toastr.success(`Succesfully saved changes to 
+        ${this.betForm.controls.firstname.value}
+        ${this.betForm.controls.lastname.value}`, '', {
+            timeOut: 3000
+          });
+        this.router.navigate(['/bets']);
+      }, error => {
+        console.log(error);
       });
   }
 
