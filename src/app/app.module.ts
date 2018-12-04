@@ -23,7 +23,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { OverviewComponent } from './overview/overview.component';
@@ -39,10 +39,12 @@ import { EditRacingTeamsComponent } from './edit-racing-teams/edit-racing-teams.
 import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
+
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
 import { CalendarComponent } from './calendar/calendar.component';
+import { RaceResultComponent } from './race-result/race-result.component';
 
 export const tokenGetter = () => localStorage.getItem('access_token');
 
@@ -58,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'raceresult', component: RaceResultComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -78,6 +81,7 @@ const appRoutes: Routes = [
     CreateDriverComponent,
     EditDriverComponent,
     EditRacingTeamsComponent,
+    RaceResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +106,7 @@ const appRoutes: Routes = [
     CommonModule,
     FormsModule,
     NgbModalModule,
+    MatExpansionModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
