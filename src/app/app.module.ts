@@ -44,7 +44,9 @@ import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
 import { CalendarComponent } from './calendar/calendar.component';
 
-export const tokenGetter = () => localStorage.getItem('access_token');
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
