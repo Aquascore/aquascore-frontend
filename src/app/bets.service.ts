@@ -19,7 +19,7 @@ export class BetsService {
   }
 
   // TODO: Make sure the bet is being given through
-  createBet(bet: Bet){
-    return this.http.post(`${environment.apiUrl}/bets/`, bet);
+  createBet(betId, bet){
+    return this.http.post(`${environment.apiUrl}/bets/`, bet, betId);
   }
 }

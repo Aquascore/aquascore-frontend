@@ -75,18 +75,24 @@ export class BetsComponent implements OnInit {
       });
   }
 
-  addBet() {
-    this.betsService.createBet(this.bet)
-      .subscribe(_ => {
-        this.toastr.success(`Succesfully saved changes to 
-        ${this.betForm.controls.firstname.value}
-        ${this.betForm.controls.lastname.value}`, '', {
+  addBet(form) {
+    const bet: Bet[] = [];
+    var i;
+    var formLength = (Object.keys(this.betForm.controls).length)
+    for (i = 1; i < formLength; i++) {
+      this.betsService.createBet(i, form.get('' + i).value)
+      .subscribe(
+        _ => {
+          this.toastr.success(`Bets succesfully created!`, '', {
             timeOut: 3000
           });
-        this.router.navigate(['/bets']);
-      }, error => {
-        console.log(error);
-      });
+          this.router.navigateByUrl('/bets');
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
 }
