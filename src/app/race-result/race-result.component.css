@@ -1,6 +1,7 @@
 .website-flex {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   width: inherit;
 }
 
@@ -45,6 +46,10 @@
 
   .website-buttons {
     display: none;
+  }
+
+  .cdk-column-constructor {
+    flex: 0 0 100px;
   }
 }
 

@@ -1,4 +1,4 @@
-<h3 class="GP-title">GP TITLE HERE</h3>
+<h3 class="GP-title">{{raceTrack}} - {{year}}</h3>
 
 <!-- NAVIGATION BUTTONS -->
 <div class="website-buttons">
@@ -8,15 +8,36 @@
       <button mat-raised-button color="primary" class="button-alignment">Current Race</button>
       <button mat-raised-button color="accent" class="button-alignment">Next Race</button>
     </div>
+    <div class="web-column">
+      <mat-form-field color="accent">
+        <input matInput [min]="minDate" [max]="maxDate" 
+        (dateInput)="getYear($event)" 
+        (dateChange)="getYear($event)"
+        [matDatepicker]="webpicker" placeholder="Choose a year">
+        <mat-datepicker-toggle matSuffix [for]="webpicker"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" touchUi #webpicker></mat-datepicker>
+      </mat-form-field>
+    </div>
   </div>
 </div>
 
 <div class="mobile-buttons">
   <div class="mobile-flex">
     <div class="mobile-column">
-      <button mat-raised-button color="accent" class="mobile-button-alignment">Previous Race</button>
-      <button mat-raised-button color="primary" class="mobile-button-alignment">Current Race</button>
-      <button mat-raised-button color="accent" class="mobile-button-alignment">Next Race</button>
+      <button mat-raised-button color="accent" (click)="previousRound()" class="mobile-button-alignment">Previous Race</button>
+      <button mat-raised-button color="primary" (click)="currentRace()" class="mobile-button-alignment">Current Race</button>
+      <button mat-raised-button color="accent" (click)="nextRound()" class="mobile-button-alignment">Next Race</button>
+    </div>
+
+    <div class="mobile-column">
+      <mat-form-field color="accent">
+        <input matInput [min]="minDate" [max]="maxDate" 
+        (dateInput)="getYear($event)" 
+        (dateChange)="getYear($event)"
+        [matDatepicker]="mobilepicker" placeholder="Choose a year">
+        <mat-datepicker-toggle matSuffix [for]="mobilepicker"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" touchUi #mobilepicker></mat-datepicker>
+      </mat-form-field>
     </div>
   </div>
 </div>
@@ -55,5 +76,4 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
 </mat-table>
