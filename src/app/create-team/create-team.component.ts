@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RacingTeamsService, Driver } from '../racing-teams.service';
+import { PoolTeamService, PoolTeam } from '../pool-team.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService, User } from '../user.service';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material';
 
 @Component({
@@ -20,21 +22,45 @@ export class CreateTeamComponent implements OnInit {
 
   constructor(
     private teamsService: RacingTeamsService,
+    private route: ActivatedRoute,
+    private poolTeamService: PoolTeamService,
     private userService: UserService,
     private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
     this.userService.getCurrentUser()
-    .subscribe((data: User) => this.currentUser = data);
+      .subscribe((data: User) => this.currentUser = data);
+    // To Do: Haal hier de eerst aankomende race ook op
   }
 
-  createTeam(form: NgForm){
+  createTeam(form: NgForm) {
     // Call api with form to create team
+    if (!form.valid) return;
+
+    const poolTeam: PoolTeam = {} as PoolTeam;
+    poolTeam.userid = this.currentUser.id;
+    poolTeam.poolid = Number(this.route.snapshot.paramMap.get("id"));
+    poolTeam.raceid = 0; // To Do: Update dit naar daadwerkelijke raceId
+    poolTeam.drivers = this.members;
+    
+    console.log(poolTeam);
+
+    this.poolTeamService.createPoolTeam(poolTeam)
+    .subscribe(
+      _ => {
+        this.toastr.success(`Team for race (Race locatie) succesfully created!`, '', {
+          timeOut: 3000
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
-  addMember(driver: Driver, event: MatChipInputEvent){
-    if(!this.members.find(member => member.id === driver.id)) {
+  addMember(driver: Driver, event: MatChipInputEvent) {
+    if (!this.members.find(member => member.id === driver.id)) {
       this.members.push(driver);
     }
 
@@ -42,7 +68,7 @@ export class CreateTeamComponent implements OnInit {
     this.searchResults = [];
   }
 
-  removeMember(driver: Driver){
+  removeMember(driver: Driver) {
     this.members = this.members.filter(member => member.id !== driver.id);
   }
 
@@ -52,14 +78,14 @@ export class CreateTeamComponent implements OnInit {
     }
 
     this.teamsService.searchDrivers(this.searchQuery)
-    .subscribe(
-      (res: Driver[]) => {
-        // Kijk of hier de drivers die al zijn geselecteerd er uit gefiltered moet en worden
-        this.searchResults = res;
-      },
-      error => {
-        console.log(error.message);
-      }
-    )
+      .subscribe(
+        (res: Driver[]) => {
+          // Kijk of hier de drivers die al zijn geselecteerd er uit gefiltered moet en worden
+          this.searchResults = res;
+        },
+        error => {
+          console.log(error.message);
+        }
+      )
   }
 }
