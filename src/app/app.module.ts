@@ -55,6 +55,7 @@ const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
   { path: 'pools/create', component: CreatePoolComponent, canActivate: [AuthGuard] },
+  { path: 'pool/:id', component: CreateTeamComponent, canActivate: [AuthGuard ]},
   { path: 'racing-teams', component: RacingTeamsComponent, canActivate: [AuthGuard] },
   { path: 'racing-teams/create', component: CreateRacingTeamComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/edit/:id', component: EditRacingTeamsComponent, canActivate: [AuthGuard]},

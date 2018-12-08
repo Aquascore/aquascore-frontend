@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -48,6 +48,10 @@ export interface Team{
       return this.http.delete(`${environment.apiUrl}/drivers/` + driverid);
     }
 
+    getDrivers(){
+      return this.http.get(`${environment.apiUrl}/drivers/`);
+    }
+
     createDriver(driver: Driver){
       return this.http.post(`${environment.apiUrl}/drivers/`, driver);
     }
@@ -58,5 +62,10 @@ export interface Team{
 
     editDriver(id: number, driver: Driver){
       return this.http.patch(`${environment.apiUrl}/drivers/` + id, driver);
+    }
+
+    searchDrivers(query: string) {
+      const params = new HttpParams().set("query", query);
+      return this.http.get(`${environment.apiUrl}/drivers/find`, {params: params});
     }
   }

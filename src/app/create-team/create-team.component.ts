@@ -1,23 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {SelectionModel} from '@angular/cdk/collections';
-
-import {MatTableDataSource} from '@angular/material';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  team: string;
-  salary: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Racer 1', team: "Mercedes", salary: "€2.000.000,-"},
-  {position: 2, name: 'Racer 2', team: "Red Bull", salary: "€8.000.000,-"},
-  {position: 3, name: 'Racer 3', team: "Ferrari", salary: "€11.000.000,-"},
-  {position: 4, name: 'Racer 4', team: "Renault", salary: "€5.000.000,-"},
-  {position: 5, name: 'Racer 5', team: "McLaren", salary: "€7.000.000,-"},
-
-];
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { RacingTeamsService, Driver } from '../racing-teams.service';
+import { ToastrService } from 'ngx-toastr';
+import { UserService, User } from '../user.service';
+import { NgForm } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-create-team',
@@ -25,26 +11,55 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./create-team.component.css']
 })
 export class CreateTeamComponent implements OnInit {
+  currentUser: User;
+  searchResults: Driver[] = [];
+  searchQuery: string = '';
+  members: Driver[] = [];
 
-  constructor() { }
+  @ViewChild('memberInput') memberInput: ElementRef<HTMLInputElement>;
+
+  constructor(
+    private teamsService: RacingTeamsService,
+    private userService: UserService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit() {
-  }
-  displayedColumns: string[] = ['select', 'position', 'name', 'team', 'salary'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+    this.userService.getCurrentUser()
+    .subscribe((data: User) => this.currentUser = data);
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+  createTeam(form: NgForm){
+    // Call api with form to create team
+  }
+
+  addMember(driver: Driver, event: MatChipInputEvent){
+    if(!this.members.find(member => member.id === driver.id)) {
+      this.members.push(driver);
+    }
+
+    this.memberInput.nativeElement.value = '';
+    this.searchResults = [];
+  }
+
+  removeMember(driver: Driver){
+    this.members = this.members.filter(member => member.id !== driver.id);
+  }
+
+  searchDrivers() {
+    if (this.searchQuery.length < 2) {
+      return;
+    }
+
+    this.teamsService.searchDrivers(this.searchQuery)
+    .subscribe(
+      (res: Driver[]) => {
+        // Kijk of hier de drivers die al zijn geselecteerd er uit gefiltered moet en worden
+        this.searchResults = res;
+      },
+      error => {
+        console.log(error.message);
+      }
+    )
   }
 }
