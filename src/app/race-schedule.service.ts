@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 export interface Location {
   country: string;
@@ -32,6 +33,12 @@ export interface RaceAPIResponse {
   MRData: MRData;
 }
 
+export interface DatabaseRace {
+  name: string;
+  date: Date;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,4 +50,8 @@ export class RaceScheduleService {
   getSchedule() {
     return this.http.get<RaceAPIResponse>(`${this.API_URL}/current.json`);
   }
+
+  addScheduleToDatabase(race: DatabaseRace){
+    return this.http.post(`${environment.apiUrl}/races/`, race);
+}
 }
