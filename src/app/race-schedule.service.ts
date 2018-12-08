@@ -51,7 +51,7 @@ export class RaceScheduleService {
     return this.http.get<RaceAPIResponse>(`${this.API_URL}/current.json`);
   }
 
-  addScheduleToDatabase(race: DatabaseRace){
-    return this.http.post(`${environment.apiUrl}/races/`, race);
-}
+  addScheduleToDatabase(allRaces: DatabaseRace){
+    return this.http.post(`${environment.apiUrl}/races/`, allRaces);
+  }
 }

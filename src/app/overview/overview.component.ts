@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RaceScheduleService, RaceAPIResponse, DatabaseRace } from '../race-schedule.service';
+import { RaceScheduleService, RaceAPIResponse } from '../race-schedule.service';
 import { Formula1NewsService } from '../formula1-news.service';
 import {lookup} from 'country-data';
+import { race } from 'q';
 
 export interface NewsItem {
   title: string;
@@ -17,6 +18,11 @@ export interface Race {
   country: string;
   date: Date;
   time: string;
+}
+
+export interface DatabaseRace {
+  name: string;
+  date: Date;
 }
 
 @Component({
@@ -79,8 +85,6 @@ export class OverviewComponent implements OnInit {
   }
 
   setScheduleToDatabase() {
-    const allRaces: DatabaseRace = {} as DatabaseRace;
-
     this.rsService.getSchedule()
     .subscribe((data: RaceAPIResponse) => {
       const allAPIRaces = data.MRData.RaceTable.Races
@@ -93,6 +97,11 @@ export class OverviewComponent implements OnInit {
       }
     });
 
-    this.rsService.addScheduleToDatabase(allRaces);
+    console.log(this.allRaces);
+
+    for (const allRace of this.allRaces) {
+      console.log(allRace);
+    }
+  
   }
 }
