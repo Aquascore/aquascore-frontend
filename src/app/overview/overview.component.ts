@@ -95,13 +95,8 @@ export class OverviewComponent implements OnInit {
           date: new Date(race.date),
         });
       }
+
+      this.rsService.addScheduleToDatabase(this.allRaces);
     });
-
-    console.log(this.allRaces);
-
-    for (const allRace of this.allRaces) {
-      console.log(allRace);
-    }
-  
   }
 }
