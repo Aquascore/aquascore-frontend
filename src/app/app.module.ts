@@ -47,7 +47,9 @@ import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
 
-export const tokenGetter = () => localStorage.getItem('access_token');
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
