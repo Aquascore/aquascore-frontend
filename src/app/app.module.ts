@@ -23,6 +23,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -38,11 +40,12 @@ import { CreateDriverComponent } from './create-driver/create-driver.component';
 import { EditRacingTeamsComponent } from './edit-racing-teams/edit-racing-teams.component';
 import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CreateTeamComponent } from './create-team/create-team.component';
 
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
-import { CalendarComponent } from './calendar/calendar.component';
 
 export const tokenGetter = () => localStorage.getItem('access_token');
 
@@ -58,6 +61,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'create-team', component: CreateTeamComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -78,6 +82,8 @@ const appRoutes: Routes = [
     CreateDriverComponent,
     EditDriverComponent,
     EditRacingTeamsComponent,
+    CreateTeamComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -102,6 +108,7 @@ const appRoutes: Routes = [
     CommonModule,
     FormsModule,
     NgbModalModule,
+    MatCheckboxModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -131,3 +138,4 @@ const appRoutes: Routes = [
   entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }
+
