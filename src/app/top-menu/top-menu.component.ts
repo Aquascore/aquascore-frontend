@@ -13,7 +13,7 @@ export class TopMenuComponent implements OnInit {
 
   constructor(private router: Router,
     private poolsService: PoolsService,
-    private userService: UserService) { }
+    public userService: UserService) { }
 
   ngOnInit() {
     this.reloadPools();

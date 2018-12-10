@@ -1,0 +1,29 @@
+<h2>Create a racing team for (plaats en datum eerst aankomende race)</h2>
+<h3>Your balance for this race: (€20.000.000)</h3>
+
+<mat-card>
+    <mat-card-content>
+        <form #teamForm="ngForm" (ngSubmit)="createTeam(teamForm)" id="create-team">
+            <mat-form-field class="full-width" color="accent">
+                <mat-chip-list #memberList>
+                    <mat-chip *ngFor="let member of members">
+                        <span>{{member.firstname}} {{member.lastname}} - (€{{member.salary}})</span>
+                        <i class="material-icons remove member" (click)="removeMember(member)">
+                            cancel
+                        </i>
+                    </mat-chip>
+                    <input #memberInput placeholder="Drivers" aria-label="Members" [matAutocomplete]="auto"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="searchQuery" (keyup)="searchDrivers()"
+                        [matChipInputFor]="memberList">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let driver of searchResults" (click)="addMember(driver, $event)">
+                        <span>{{ driver.firstname }} {{ driver.lastname }} - (€{{ driver.salary }})</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">CREATE TEAM</button>
+        </form>
+    </mat-card-content>
+</mat-card>
