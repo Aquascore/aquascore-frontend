@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +26,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -42,6 +44,9 @@ import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
+import { RaceResultComponent } from './race-result/race-result.component';
+
+
 
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
@@ -65,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'create-team', component: CreateTeamComponent},
+  { path: 'raceresult', component: RaceResultComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -86,6 +92,7 @@ const appRoutes: Routes = [
     EditDriverComponent,
     EditRacingTeamsComponent,
     CreateTeamComponent,
+    RaceResultComponent,
   
   ],
   imports: [
@@ -99,6 +106,8 @@ const appRoutes: Routes = [
     MatTableModule,
     MatGridListModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -112,6 +121,7 @@ const appRoutes: Routes = [
     FormsModule,
     NgbModalModule,
     MatCheckboxModule,
+    MatExpansionModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,

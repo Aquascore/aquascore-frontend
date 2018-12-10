@@ -1,0 +1,79 @@
+<h3 class="GP-title">{{raceTrack}} - {{year}}</h3>
+
+<!-- NAVIGATION BUTTONS -->
+<div class="website-buttons">
+  <div class="website-flex">
+    <div class="web-column">
+      <button mat-raised-button color="accent" class="button-alignment">Previous Race</button>
+      <button mat-raised-button color="primary" class="button-alignment">Current Race</button>
+      <button mat-raised-button color="accent" class="button-alignment">Next Race</button>
+    </div>
+    <div class="web-column">
+      <mat-form-field color="accent">
+        <input matInput [min]="minDate" [max]="maxDate" 
+        (dateInput)="getYear($event)" 
+        (dateChange)="getYear($event)"
+        [matDatepicker]="webpicker" placeholder="Choose a year">
+        <mat-datepicker-toggle matSuffix [for]="webpicker"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" touchUi #webpicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-buttons">
+  <div class="mobile-flex">
+    <div class="mobile-column">
+      <button mat-raised-button color="accent" (click)="previousRound()" class="mobile-button-alignment">Previous Race</button>
+      <button mat-raised-button color="primary" (click)="currentRace()" class="mobile-button-alignment">Current Race</button>
+      <button mat-raised-button color="accent" (click)="nextRound()" class="mobile-button-alignment">Next Race</button>
+    </div>
+
+    <div class="mobile-column">
+      <mat-form-field color="accent">
+        <input matInput [min]="minDate" [max]="maxDate" 
+        (dateInput)="getYear($event)" 
+        (dateChange)="getYear($event)"
+        [matDatepicker]="mobilepicker" placeholder="Choose a year">
+        <mat-datepicker-toggle matSuffix [for]="mobilepicker"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" touchUi #mobilepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE WITH DATA OF THE RACES -->
+<mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef> POSITION </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.position}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> CODE </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.code}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="driver">
+    <mat-header-cell *matHeaderCellDef> DRIVER </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.givenName}} {{df.familyName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="constructor">
+    <mat-header-cell *matHeaderCellDef> CONSTRUCTOR </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.constructor}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="laps">
+    <mat-header-cell *matHeaderCellDef> LAPS </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.laps}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> TIME </mat-header-cell>
+    <mat-cell *matCellDef="let df"> {{df.time}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
