@@ -26,7 +26,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -44,6 +44,8 @@ import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
+import { RaceResultComponent } from './race-result/race-result.component';
+
 
 
 import { environment } from '../environments/environment';
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'create-team', component: CreateTeamComponent},
+  { path: 'raceresult', component: RaceResultComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -89,6 +92,7 @@ const appRoutes: Routes = [
     EditDriverComponent,
     EditRacingTeamsComponent,
     CreateTeamComponent,
+    RaceResultComponent,
   
   ],
   imports: [
