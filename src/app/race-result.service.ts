@@ -21,6 +21,11 @@ export interface Constructor {
   name: string;
 }
 
+export interface FastestLap {
+  lap: string;
+  Time: Time;
+}
+
 export interface Time {
   millis: string;
   time: string;
@@ -33,6 +38,7 @@ export interface Result {
   Constructor: Constructor;
   laps: string;
   Time: Time;
+  FastestLap: FastestLap;
 }
 
 export interface Race {
@@ -69,5 +75,9 @@ export class RaceResultService {
 
   getResults(year, round) {
     return this.http.get<RaceAPIResponse>(`${this.API_URL}/`+ year + `/`+ round + `/results.json`);
+  }
+
+  getFastest(year, round) {
+    return this.http.get<RaceAPIResponse>(`${this.API_URL}/`+ year + `/`+ round + `/fastest/1/results.json`);
   }
 }
