@@ -26,6 +26,7 @@ export class RaceResultComponent implements OnInit {
 
   // Array which contains all the results
   race_results: Result[] = [];
+  fastestrace_results: Result[] = [];
 
   // Table information
   displayedColumns: string[] = ['position', 'code', 'driver', 'constructor', 'laps', 'time'];
@@ -37,6 +38,7 @@ export class RaceResultComponent implements OnInit {
   ngOnInit() {
     this.showRaceResults();
     this.getScreenInformation();
+    this.showFastestLap();
   }
 
   getScreenInformation() {
@@ -51,6 +53,7 @@ export class RaceResultComponent implements OnInit {
   getYear(event: MatDatepickerInputEvent<Date>) {
     this.year = event.value.getFullYear();
     this.showRaceResults();
+    this.showFastestLap();
   }
 
   previousRound() {
@@ -62,6 +65,7 @@ export class RaceResultComponent implements OnInit {
     
     this.round = newRound.toLocaleString();
     this.showRaceResults();
+    this.showFastestLap();
   }
 
   nextRound() {
@@ -73,6 +77,7 @@ export class RaceResultComponent implements OnInit {
 
     this.round = newRound.toLocaleString();
     this.showRaceResults();
+    this.showFastestLap();
   }
 
   currentRace() {
@@ -80,6 +85,7 @@ export class RaceResultComponent implements OnInit {
     this.year = date.getFullYear();
     this.round = "last";
     this.showRaceResults();
+    this.showFastestLap();
   }
 
   showRaceResults() {
@@ -105,6 +111,22 @@ export class RaceResultComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.race_results)
           this.raceTrack = result.raceName;
           this.round = result.round;
+        }
+      });
+  }
+
+  showFastestLap() {
+    this.fastestrace_results.length = 0;
+    this.resultService.getFastest(this.year, this.round)
+      .subscribe((data: RaceAPIResponse) => {
+        const results = data.MRData.RaceTable.Races
+        for (let result of results) {
+          this.fastestrace_results.push({
+            givenName: result.Results[0].Driver.givenName,
+            familyName: result.Results[0].Driver.familyName,
+            time: result.Results[0].FastestLap.Time.time,
+            lap: result.Results[0].FastestLap.lap
+          });
         }
       });
   }
