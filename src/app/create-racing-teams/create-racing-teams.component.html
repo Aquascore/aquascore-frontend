@@ -1,17 +1,13 @@
-
 <h2>Create a racing-team</h2>
 <mat-card>
     <mat-card-content>
         <form #racingTeamForm="ngForm" (ngSubmit)="createRacingTeam(racingTeamForm)" id="create-racingTeam">
             <mat-form-field class="full-width" color="accent">
-                <input name="name" matInput placeholder="Name" ngModel required> 
+                <input name="name" matInput placeholder="Name" ngModel required>
             </mat-form-field>
 
-            <mat-form-field class="full-width" color="accent">
-                <input name="teamcol" type="number" matInput placeholder="Teamcol" ngModel required> 
-            </mat-form-field>
-            
-            <button mat-raised-button color="primary" type="submit" [disabled]="!racingTeamForm.valid">CREATE RACINGTEAM</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!racingTeamForm.valid">CREATE
+                RACINGTEAM</button>
         </form>
     </mat-card-content>
 </mat-card>
