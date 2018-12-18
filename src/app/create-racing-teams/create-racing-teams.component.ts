@@ -27,7 +27,7 @@ export class CreateRacingTeamComponent implements OnInit {
 
     const team: Team = {} as Team;
     team.name = form.value.name;
-    team.teamcol = 1;
+    team.teamcol = '1';
 
     console.log(team);
 
