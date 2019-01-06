@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BetsService } from '../bets.service';
+import { BetsService, Bet } from '../bets.service';
+import { UserService, User } from '../user.service';
 import { PoolsService, Pool } from '../pools.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
-export interface BetItem {
-  id: number;
-  title: string;
-  points: number;
-}
 
 export interface Bet {
   betId: number;
@@ -29,13 +24,14 @@ export interface Driver {
 })
 export class BetsComponent implements OnInit {
 
-  Bets: BetItem[] = [];
+  Bets: Bet[] = [];
+  currentUser: User;
 
   drivers: Driver[] = [
-    {first_name: 'Lewis', last_name: 'Hamilton'},
-    {first_name: 'Valteri', last_name: 'Bottas'},
-    {first_name: 'Daniel', last_name: 'Ricciardo'},
-    {first_name: 'Max', last_name: 'Verstappen'},
+    { first_name: 'Lewis', last_name: 'Hamilton' },
+    { first_name: 'Valteri', last_name: 'Bottas' },
+    { first_name: 'Daniel', last_name: 'Ricciardo' },
+    { first_name: 'Max', last_name: 'Verstappen' },
   ];
 
   userPools: Pool[] = [
@@ -48,14 +44,17 @@ export class BetsComponent implements OnInit {
   })
 
   constructor(
-     private betsService: BetsService,
-     private poolsService: PoolsService, 
-     private toastr: ToastrService,
-     private router: Router) { }
+    private betsService: BetsService,
+    private poolsService: PoolsService,
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router: Router) { }
 
   ngOnInit() {
     this.showBets();
     this.receivePools();
+    this.userService.getCurrentUser()
+      .subscribe((data: User) => this.currentUser = data);
   }
 
   showBets() {
@@ -78,20 +77,20 @@ export class BetsComponent implements OnInit {
   addBet(form) {
     const bet: Bet[] = [];
     var i;
-    var formLength = (Object.keys(this.betForm.controls).length)
+    var formLength = (Object.keys(this.betForm.controls).length);
     for (i = 1; i < formLength; i++) {
-      this.betsService.createBet(i, form.get('' + i).value)
-      .subscribe(
-        _ => {
-          this.toastr.success(`Bets succesfully created!`, '', {
-            timeOut: 3000
-          });
-          this.router.navigateByUrl('/bets');
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      this.betsService.createBet(form.get('' + i).value, this.currentUser, this.Bets[i])
+        .subscribe(
+          _ => {
+            this.toastr.success(`Bet succesfully created!`, '', {
+              timeOut: 3000
+            });
+            this.router.navigateByUrl('/bets');
+          },
+          error => {
+            console.log(error);
+          }
+        );
     }
   }
 
