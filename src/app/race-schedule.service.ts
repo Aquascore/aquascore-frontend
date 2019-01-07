@@ -34,6 +34,7 @@ export interface RaceAPIResponse {
 }
 
 export interface DatabaseRace {
+  id: number;
   name: string;
   date: Date;
 }
@@ -49,6 +50,10 @@ export class RaceScheduleService {
 
   getSchedule() {
     return this.http.get<RaceAPIResponse>(`${this.API_URL}/current.json`);
+  }
+
+  getRaces(){
+    return this.http.get(`${environment.apiUrl}/races/`);
   }
 
   addScheduleToDatabase(allRaces: DatabaseRace[]){

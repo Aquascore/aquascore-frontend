@@ -20,6 +20,10 @@ export class PoolsService {
     return this.http.get(`${environment.apiUrl}/pools/`);
   }
 
+  getById(poolId: number){
+    return this.http.get(`${environment.apiUrl}/pools/${poolId}`);
+  }
+
   createPool(pool: Pool) {
     return this.http.post(`${environment.apiUrl}/pools/`, pool);
   }

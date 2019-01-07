@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RacingTeamsService, Driver } from '../racing-teams.service';
 import { PoolTeamService, PoolTeam } from '../pool-team.service';
+import { PoolsService, Pool } from '../pools.service';
+import { RaceScheduleService, DatabaseRace } from '../race-schedule.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService, User } from '../user.service';
 import { NgForm } from '@angular/forms';
@@ -14,7 +16,10 @@ import { MatChipInputEvent } from '@angular/material';
 })
 export class CreateTeamComponent implements OnInit {
   currentUser: User;
+  currentPool: Pool = {} as Pool;
   searchResults: Driver[] = [];
+  budget: number = 20000000;
+  upcomingRaces: DatabaseRace[] = [];
   searchQuery: string = '';
   members: Driver[] = [];
 
@@ -22,7 +27,9 @@ export class CreateTeamComponent implements OnInit {
 
   constructor(
     private teamsService: RacingTeamsService,
+    private raceSchedule: RaceScheduleService,
     private route: ActivatedRoute,
+    private poolService: PoolsService,
     private poolTeamService: PoolTeamService,
     private userService: UserService,
     private toastr: ToastrService,
@@ -31,7 +38,10 @@ export class CreateTeamComponent implements OnInit {
   ngOnInit() {
     this.userService.getCurrentUser()
       .subscribe((data: User) => this.currentUser = data);
-    // To Do: Haal hier de eerst aankomende race ook op
+    this.raceSchedule.getRaces()
+      .subscribe((data: DatabaseRace[]) => this.upcomingRaces = data);
+    this.poolService.getById(Number(this.route.snapshot.paramMap.get("id")))
+      .subscribe((data: Pool) => this.currentPool = data);
   }
 
   createTeam(form: NgForm) {
@@ -39,9 +49,9 @@ export class CreateTeamComponent implements OnInit {
     if (!form.valid) return;
 
     const poolTeam: PoolTeam = {} as PoolTeam;
-    poolTeam.userid = this.currentUser.id;
-    poolTeam.poolid = Number(this.route.snapshot.paramMap.get("id"));
-    poolTeam.raceid = 0; // To Do: Update dit naar daadwerkelijke raceId
+    poolTeam.user = this.currentUser;
+    poolTeam.pool = this.currentPool;
+    poolTeam.race = this.upcomingRaces[0];
     poolTeam.drivers = this.members;
     
     console.log(poolTeam);
@@ -49,7 +59,7 @@ export class CreateTeamComponent implements OnInit {
     this.poolTeamService.createPoolTeam(poolTeam)
     .subscribe(
       _ => {
-        this.toastr.success(`Team for race (Race locatie) succesfully created!`, '', {
+        this.toastr.success(`Team for race ${this.upcomingRaces[0].name} succesfully created!`, '', {
           timeOut: 3000
         });
       },
@@ -65,10 +75,12 @@ export class CreateTeamComponent implements OnInit {
     }
 
     this.memberInput.nativeElement.value = '';
+    this.budget = this.budget - driver.salary;
     this.searchResults = [];
   }
 
   removeMember(driver: Driver) {
+    this.budget += driver.salary;
     this.members = this.members.filter(member => member.id !== driver.id);
   }
 

@@ -21,6 +21,7 @@ export interface Race {
 }
 
 export interface DatabaseRace {
+  id: number;
   name: string;
   date: Date;
 }
@@ -91,6 +92,7 @@ export class OverviewComponent implements OnInit {
 
       for (let race of allAPIRaces) {
         this.allRaces.push({
+          id: 0,
           name: race.raceName,
           date: new Date(race.date),
         });
