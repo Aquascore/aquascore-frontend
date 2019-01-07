@@ -96,7 +96,7 @@ export class OverviewComponent implements OnInit {
         });
       }
 
-      this.rsService.addScheduleToDatabase(this.allRaces);
+      this.rsService.addScheduleToDatabase(this.allRaces).subscribe();
     });
   }
 }
