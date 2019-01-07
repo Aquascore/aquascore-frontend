@@ -18,3 +18,10 @@
   cursor: pointer;
   vertical-align: baseline;
 }
+
+.btn-width-total button {
+  width: 20%;
+  display: block;
+  margin-top: 10px!important;
+  float: right
+}

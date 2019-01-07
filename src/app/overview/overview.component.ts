@@ -20,6 +20,12 @@ export interface Race {
   time: string;
 }
 
+export interface DatabaseRace {
+  id: number;
+  name: string;
+  date: Date;
+}
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
@@ -31,11 +37,14 @@ export class OverviewComponent implements OnInit {
 
   races: Race[] = [];
 
+  allRaces: DatabaseRace[] = [];
+
   constructor(private rsService: RaceScheduleService, private newsService: Formula1NewsService) { }
 
   ngOnInit() {
     this.showNews();
     this.showRaceSchedule();
+    this.setScheduleToDatabase();
   }
 
   showNews() {
@@ -74,5 +83,22 @@ export class OverviewComponent implements OnInit {
           });
         }
       });
+  }
+
+  setScheduleToDatabase() {
+    this.rsService.getSchedule()
+    .subscribe((data: RaceAPIResponse) => {
+      const allAPIRaces = data.MRData.RaceTable.Races
+
+      for (let race of allAPIRaces) {
+        this.allRaces.push({
+          id: 0,
+          name: race.raceName,
+          date: new Date(race.date),
+        });
+      }
+
+      this.rsService.addScheduleToDatabase(this.allRaces).subscribe();
+    });
   }
 }

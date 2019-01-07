@@ -1,0 +1,65 @@
+.website-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: inherit;
+}
+
+.GP-title {
+  text-align: center;
+}
+  
+.mobile-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: inherit;
+}
+
+.web-column {
+  text-align: center;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+.mobile-column {
+  text-align: center;
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 8%;
+}
+
+.button-alignment {
+  margin-right: 5%;
+}
+
+.mobile-button-alignment {
+  margin-right: 3%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .mobile-buttons {
+    display: inline;
+  }
+
+  .website-buttons {
+    display: none;
+  }
+
+  .cdk-column-constructor {
+    flex: 0 0 100px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* For tablets or bigger: */
+  .mobile-buttons {
+    display: none;
+  }
+
+  .website-buttons {
+    display: inline;
+  }
+}

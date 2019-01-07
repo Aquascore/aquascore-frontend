@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +25,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
@@ -38,23 +42,32 @@ import { CreateDriverComponent } from './create-driver/create-driver.component';
 import { EditRacingTeamsComponent } from './edit-racing-teams/edit-racing-teams.component';
 import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { BetsComponent } from './bets/bets.component';
+import { CreateTeamComponent } from './create-team/create-team.component';
+import { RaceResultComponent } from './race-result/race-result.component';
+
+
 
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
-import { CalendarComponent } from './calendar/calendar.component';
 
-export const tokenGetter = () => localStorage.getItem('access_token');
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 const appRoutes: Routes = [
   { path: '', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'pools', component: PoolsComponent, canActivate: [AuthGuard] },
   { path: 'pools/create', component: CreatePoolComponent, canActivate: [AuthGuard] },
+  { path: 'pool/:id', component: CreateTeamComponent, canActivate: [AuthGuard ]},
   { path: 'racing-teams', component: RacingTeamsComponent, canActivate: [AuthGuard] },
   { path: 'racing-teams/create', component: CreateRacingTeamComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/edit/:id', component: EditRacingTeamsComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/createDriver', component: CreateDriverComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/editDriver/:id', component: EditDriverComponent, canActivate: [AuthGuard]},
+  { path: 'bets', component: BetsComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
@@ -78,6 +91,10 @@ const appRoutes: Routes = [
     CreateDriverComponent,
     EditDriverComponent,
     EditRacingTeamsComponent,
+    BetsComponent,
+    CreateTeamComponent,
+    RaceResultComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -90,7 +107,10 @@ const appRoutes: Routes = [
     MatTableModule,
     MatGridListModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
@@ -101,7 +121,10 @@ const appRoutes: Routes = [
     MatChipsModule,
     CommonModule,
     FormsModule,
+    MatExpansionModule,
     NgbModalModule,
+    MatCheckboxModule,
+    MatExpansionModule,
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -131,3 +154,4 @@ const appRoutes: Routes = [
   entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }
+

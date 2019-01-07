@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreatePoolComponent implements OnInit {
   currentUser: User;
-  searchResults: User[] = [];
+  searchResult: User;
   searchQuery: string = '';
   members: User[] = [];
 
@@ -62,7 +62,7 @@ export class CreatePoolComponent implements OnInit {
     }
 
     this.memberInput.nativeElement.value = '';
-    this.searchResults = [];
+    this.searchResult = null;
   }
 
   removeMember(user: User) {
@@ -70,16 +70,14 @@ export class CreatePoolComponent implements OnInit {
   }
 
   searchUsers() {
-    if (this.searchQuery.length < 2) {
+    if (this.searchQuery.length < 3) {
       return;
     }
 
     this.userService.search(this.searchQuery)
       .subscribe(
-        (res: User[]) => {
-          // Don't show current user in search results
-          res = res.filter(user => user.id !== this.currentUser.id);
-          this.searchResults = res;
+        (res: User) => {
+          this.searchResult = res;
         },
         error => {
           console.log(error.message);
