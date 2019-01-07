@@ -51,6 +51,7 @@ import { RaceResultComponent } from './race-result/race-result.component';
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
+import { CalendarComponent } from './calendar/calendar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -69,8 +70,6 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'create-team', component: CreateTeamComponent},
-  { path: 'raceresult', component: RaceResultComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -91,6 +90,7 @@ const appRoutes: Routes = [
     CreateDriverComponent,
     EditDriverComponent,
     EditRacingTeamsComponent,
+    BetsComponent,
     CreateTeamComponent,
     RaceResultComponent,
   
@@ -109,6 +109,7 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
@@ -119,6 +120,7 @@ const appRoutes: Routes = [
     MatChipsModule,
     CommonModule,
     FormsModule,
+    MatExpansionModule,
     NgbModalModule,
     MatCheckboxModule,
     MatExpansionModule,

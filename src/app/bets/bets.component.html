@@ -1,0 +1,37 @@
+<form [formGroup]="betForm" (ngSubmit)="addBet(betForm)" id="create-bet">
+  <mat-card class="section">
+    <h3>Select the pool you're betting for</h3>
+    <mat-form-field color="accent" style="width: 100%;">
+      <mat-select placeholder="Select a pool" formControlName="poolName" required>
+        <mat-option *ngFor="let pool of userPools" [value]="pool.name">
+          {{pool.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card>
+
+  <br>
+
+  <mat-card class="section">
+    <mat-card-content>
+      <h3>Bet Overview</h3>
+      <div style="margin-bottom: 1em;" *ngFor="let betItem of Bets; let i = index">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{betItem.title}}</mat-panel-title>
+            <mat-panel-description>Points to earn: {{betItem.points}}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-form-field color="accent" style="width: 100%;">
+            <mat-select placeholder="Select driver" formControlName="{{i+1}}" required>
+              <mat-option *ngFor="let driver of drivers" [value]="driver">
+                {{driver.first_name}} {{driver.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </div>
+      <button mat-raised-button color="accent" style="width: 100%;" type="submit" [disabled]="!betForm.valid">Submit
+        bets</button>
+    </mat-card-content>
+  </mat-card>
+</form>
