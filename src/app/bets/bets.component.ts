@@ -85,7 +85,7 @@ export class BetsComponent implements OnInit {
     var i;
     var formLength = (Object.keys(this.betForm.controls).length);
     for (i = 1; i < formLength; i++) {
-      this.betsService.createBet(form.get('' + i).value, this.currentUser, this.Bets[i], this.upcomingRaces[0])
+      this.betsService.createBet(form.get('' + i).value, this.currentUser, this.Bets[i-1], this.upcomingRaces[0])
         .subscribe(
           _ => {
             this.toastr.success(`Bet succesfully created!`, '', {
