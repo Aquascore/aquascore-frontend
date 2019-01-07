@@ -24,7 +24,7 @@
           <mat-form-field color="accent" style="width: 100%;">
             <mat-select placeholder="Select driver" formControlName="{{i+1}}" required>
               <mat-option *ngFor="let driver of drivers" [value]="driver">
-                {{driver.first_name}} {{driver.last_name}}
+                {{driver.firstname}} {{driver.lastname}}
               </mat-option>
             </mat-select>
           </mat-form-field>

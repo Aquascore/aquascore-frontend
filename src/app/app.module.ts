@@ -43,6 +43,7 @@ import { EditRacingTeamsComponent } from './edit-racing-teams/edit-racing-teams.
 import { EditDriverComponent } from './edit-driver/edit-driver.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { BetsComponent } from './bets/bets.component';
 import { CreateTeamComponent } from './create-team/create-team.component';
 import { RaceResultComponent } from './race-result/race-result.component';
 
@@ -51,7 +52,6 @@ import { RaceResultComponent } from './race-result/race-result.component';
 import { environment } from '../environments/environment';
 import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard';
-import { CalendarComponent } from './calendar/calendar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -67,6 +67,7 @@ const appRoutes: Routes = [
   { path: 'racing-teams/edit/:id', component: EditRacingTeamsComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/createDriver', component: CreateDriverComponent, canActivate: [AuthGuard]},
   { path: 'racing-teams/editDriver/:id', component: EditDriverComponent, canActivate: [AuthGuard]},
+  { path: 'bets', component: BetsComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BetsService, Bet } from '../bets.service';
 import { UserService, User } from '../user.service';
 import { PoolsService, Pool } from '../pools.service';
+import { RacingTeamsService } from '../racing-teams.service';
+import { RaceScheduleService, DatabaseRace } from '../race-schedule.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -27,15 +29,9 @@ export class BetsComponent implements OnInit {
   Bets: Bet[] = [];
   currentUser: User;
 
-  drivers: Driver[] = [
-    { first_name: 'Lewis', last_name: 'Hamilton' },
-    { first_name: 'Valteri', last_name: 'Bottas' },
-    { first_name: 'Daniel', last_name: 'Ricciardo' },
-    { first_name: 'Max', last_name: 'Verstappen' },
-  ];
-
-  userPools: Pool[] = [
-  ];
+  drivers: Driver[] = [];
+  upcomingRaces: DatabaseRace[] = [];
+  userPools: Pool[] = [];
 
   bet: Bet;
 
@@ -45,6 +41,8 @@ export class BetsComponent implements OnInit {
 
   constructor(
     private betsService: BetsService,
+    private racingTeamsService: RacingTeamsService,
+    private raceScheduleService: RaceScheduleService,
     private poolsService: PoolsService,
     private userService: UserService,
     private toastr: ToastrService,
@@ -52,7 +50,7 @@ export class BetsComponent implements OnInit {
 
   ngOnInit() {
     this.showBets();
-    this.receivePools();
+    this.receiveData();
     this.userService.getCurrentUser()
       .subscribe((data: User) => this.currentUser = data);
   }
@@ -67,11 +65,19 @@ export class BetsComponent implements OnInit {
       });
   }
 
-  receivePools() {
+  receiveData() {
     this.poolsService.getUserPools()
       .subscribe((pools: Pool[]) => {
         this.userPools = pools;
       });
+    this.racingTeamsService.getDrivers()
+      .subscribe((data: Driver[]) => {
+        this.drivers = data;
+      });
+    this.raceScheduleService.getRaces()
+    .subscribe((data: DatabaseRace[]) => {
+      this.upcomingRaces = data;
+    });
   }
 
   addBet(form) {
@@ -79,7 +85,7 @@ export class BetsComponent implements OnInit {
     var i;
     var formLength = (Object.keys(this.betForm.controls).length);
     for (i = 1; i < formLength; i++) {
-      this.betsService.createBet(form.get('' + i).value, this.currentUser, this.Bets[i])
+      this.betsService.createBet(form.get('' + i).value, this.currentUser, this.Bets[i], this.upcomingRaces[0])
         .subscribe(
           _ => {
             this.toastr.success(`Bet succesfully created!`, '', {

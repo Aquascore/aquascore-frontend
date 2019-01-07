@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { User } from './user.service';
-import { Race } from './race-schedule.service';
+import { DatabaseRace } from './race-schedule.service';
 
 export interface CurrentBet {
   id: number;
   user: User;
   bet: Bet;
+  race: DatabaseRace;
   prediction: String;
 }
 
@@ -28,12 +29,13 @@ export class BetsService {
   }
 
   // TODO: Make sure the bet is being given through
-  createBet(betString, user: User, bet: Bet){
+  createBet(betString, user: User, bet: Bet, race: DatabaseRace){
     const betObj: CurrentBet = {} as CurrentBet;
 
     betObj.prediction = JSON.stringify(betString);
     betObj.user = user
     betObj.bet = bet
+    betObj.race = race;
     return this.http.post(`${environment.apiUrl}/bets/`, betObj);
   }
 }
