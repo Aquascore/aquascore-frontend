@@ -71,6 +71,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'raceresult', component: RaceResultComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
